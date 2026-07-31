@@ -1,0 +1,9 @@
+<div id="mensagens" class="container-xl pt-3" aria-live="polite" aria-atomic="true">
+  <% flash.each do |tipo, mensagem| %>
+    <% classe = tipo.to_s == "alert" ? "alert-danger" : "alert-success" %>
+    <div class="alert <%= classe %> alert-dismissible" role="status">
+      <%= mensagem %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+  <% end %>
+</div>

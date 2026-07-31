@@ -1,0 +1,23 @@
+<h1><%= @manifestacao.tipo.humanize %> · <%= @manifestacao.categoria %></h1>
+<div class="row row-cards">
+  <div class="col-lg-7"><article class="card card-neon"><div class="card-body">
+    <%= simple_format @manifestacao.mensagem %>
+    <hr>
+    <dl class="row mb-0">
+      <dt class="col-sm-4">Contato</dt><dd class="col-sm-8"><%= @pode_ver_contato ? (@manifestacao.contato.presence || "Não informado") : "Protegido por permissão" %></dd>
+      <dt class="col-sm-4">Situação</dt><dd class="col-sm-8"><%= badge_situacao(@manifestacao.situacao) %></dd>
+    </dl>
+  </div></article></div>
+  <div class="col-lg-5"><div class="card card-neon"><div class="card-body">
+    <h2 class="h4">Tratamento</h2>
+    <%= form_with model: [:administracao, @manifestacao] do |form| %>
+      <%= form.label :situacao, "Situação", class: "form-label" %>
+      <%= form.select :situacao, Manifestacao.situacoes.keys.map { |valor| [valor.humanize, valor] }, {}, class: "form-select mb-3" %>
+      <%= form.label :responsavel_id, "Responsável", class: "form-label" %>
+      <%= form.collection_select :responsavel_id, UsuarioAdministrativo.ativos.order(:nome), :id, :nome, { include_blank: "Atribuir a mim" }, class: "form-select mb-3" %>
+      <%= form.label :observacao_interna, "Observação interna", class: "form-label" %>
+      <%= form.text_area :observacao_interna, rows: 4, class: "form-control mb-3" %>
+      <%= form.submit "Atualizar", class: "btn btn-neon" %>
+    <% end %>
+  </div></div></div>
+</div>

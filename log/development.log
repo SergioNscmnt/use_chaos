@@ -1,0 +1,250 @@
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE DATABASE `use_chaos_development` DEFAULT CHARACTER SET `utf8mb4` /*application='UseChaos'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE `use_chaos_test` DEFAULT CHARACTER SET `utf8mb4` /*application='UseChaos'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35m (276.6ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='UseChaos'*/[0m
+  [1m[35m (232.7ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='UseChaos'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('929018082984190920', 0) /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (51.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-07-31 04:13:28.623005', '2026-07-31 04:13:28.623008') RETURNING `key` /*application='UseChaos'*/[0m
+Migrating to CreateActiveStorageTables (20260731041002)
+  [1m[35m (320.2ms)[0m  [1m[35mCREATE TABLE `active_storage_blobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `key` varchar(255) NOT NULL, `filename` varchar(255) NOT NULL, `content_type` varchar(255), `metadata` text, `service_name` varchar(255) NOT NULL, `byte_size` bigint NOT NULL, `checksum` varchar(255), `created_at` datetime(6) NOT NULL, UNIQUE INDEX `index_active_storage_blobs_on_key` (`key`)) /*application='UseChaos'*/[0m
+  [1m[35m (387.9ms)[0m  [1m[35mCREATE TABLE `active_storage_attachments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `record_type` varchar(255) NOT NULL, `record_id` bigint NOT NULL, `blob_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, INDEX `index_active_storage_attachments_on_blob_id` (`blob_id`), UNIQUE INDEX `index_active_storage_attachments_uniqueness` (`record_type`, `record_id`, `name`, `blob_id`), CONSTRAINT `fk_rails_c3b3935057`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (324.3ms)[0m  [1m[35mCREATE TABLE `active_storage_variant_records` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `blob_id` bigint NOT NULL, `variation_digest` varchar(255) NOT NULL, UNIQUE INDEX `index_active_storage_variant_records_uniqueness` (`blob_id`, `variation_digest`), CONSTRAINT `fk_rails_993965df05`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (28.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260731041002') RETURNING `version` /*application='UseChaos'*/[0m
+Migrating to CriarAcessosECatalogo (20260731041100)
+  [1m[35m (238.9ms)[0m  [1m[35mCREATE TABLE `perfis` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `nome` varchar(255) NOT NULL, `permissoes` json NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='UseChaos'*/[0m
+  [1m[35m (495.9ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_perfis_on_nome` ON `perfis` (`nome`) /*application='UseChaos'*/[0m
+  [1m[35m (296.5ms)[0m  [1m[35mCREATE TABLE `usuarios_administrativos` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `nome` varchar(255) NOT NULL, `perfil_id` bigint NOT NULL, `ativo` boolean DEFAULT TRUE NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime(6), `remember_created_at` datetime(6), `sign_in_count` int DEFAULT 0 NOT NULL, `current_sign_in_at` datetime(6), `last_sign_in_at` datetime(6), `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_usuarios_administrativos_on_perfil_id` (`perfil_id`), CONSTRAINT `fk_rails_d4501a5299`
+FOREIGN KEY (`perfil_id`)
+  REFERENCES `perfis` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (508.1ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_usuarios_administrativos_on_email` ON `usuarios_administrativos` (`email`) /*application='UseChaos'*/[0m
+  [1m[35m (551.7ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_usuarios_administrativos_on_reset_password_token` ON `usuarios_administrativos` (`reset_password_token`) /*application='UseChaos'*/[0m
+  [1m[35m (477.6ms)[0m  [1m[35mCREATE INDEX `index_usuarios_administrativos_on_ativo` ON `usuarios_administrativos` (`ativo`) /*application='UseChaos'*/[0m
+  [1m[35m (457.8ms)[0m  [1m[35mCREATE TABLE `registros_auditoria` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `usuario_administrativo_id` bigint, `acao` varchar(255) NOT NULL, `alvo_type` varchar(255), `alvo_id` bigint, `dados_anteriores` json, `dados_novos` json, `detalhes` json, `endereco_ip` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_registros_auditoria_on_usuario_administrativo_id` (`usuario_administrativo_id`), CONSTRAINT `fk_rails_3f023499d3`
+FOREIGN KEY (`usuario_administrativo_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (573.4ms)[0m  [1m[35mCREATE INDEX `index_registros_auditoria_on_alvo_type_and_alvo_id` ON `registros_auditoria` (`alvo_type`, `alvo_id`) /*application='UseChaos'*/[0m
+  [1m[35m (480.3ms)[0m  [1m[35mCREATE INDEX `index_registros_auditoria_on_acao_and_created_at` ON `registros_auditoria` (`acao`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (339.8ms)[0m  [1m[35mCREATE TABLE `categorias` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `nome` varchar(255) NOT NULL, `slug` varchar(255) NOT NULL, `descricao` text, `ativa` boolean DEFAULT TRUE NOT NULL, `posicao` int DEFAULT 0 NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='UseChaos'*/[0m
+  [1m[35m (526.6ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_categorias_on_nome` ON `categorias` (`nome`) /*application='UseChaos'*/[0m
+  [1m[35m (533.4ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_categorias_on_slug` ON `categorias` (`slug`) /*application='UseChaos'*/[0m
+  [1m[35m (628.2ms)[0m  [1m[35mCREATE INDEX `index_categorias_on_ativa_and_posicao` ON `categorias` (`ativa`, `posicao`) /*application='UseChaos'*/[0m
+  [1m[35m (319.2ms)[0m  [1m[35mCREATE TABLE `produtos` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `categoria_id` bigint NOT NULL, `nome` varchar(255) NOT NULL, `slug` varchar(255) NOT NULL, `sku` varchar(255) NOT NULL, `descricao` text NOT NULL, `caracteristicas` json, `preco_centavos` bigint NOT NULL, `custo_centavos` bigint NOT NULL, `estoque` int DEFAULT 0 NOT NULL, `limiar_estoque_baixo` int, `ativo` boolean DEFAULT TRUE NOT NULL, `publicado` boolean DEFAULT FALSE NOT NULL, `disponivel` boolean DEFAULT TRUE NOT NULL, `destaque` boolean DEFAULT FALSE NOT NULL, `lancamento_em` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_produtos_on_categoria_id` (`categoria_id`), CONSTRAINT `fk_rails_dc32f10a74`
+FOREIGN KEY (`categoria_id`)
+  REFERENCES `categorias` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (485.8ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_produtos_on_slug` ON `produtos` (`slug`) /*application='UseChaos'*/[0m
+  [1m[35m (609.6ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_produtos_on_sku` ON `produtos` (`sku`) /*application='UseChaos'*/[0m
+  [1m[35m (574.2ms)[0m  [1m[35mCREATE INDEX `idx_produtos_elegibilidade` ON `produtos` (`ativo`, `publicado`, `disponivel`, `estoque`) /*application='UseChaos'*/[0m
+  [1m[35m (507.7ms)[0m  [1m[35mCREATE INDEX `idx_produtos_catalogo` ON `produtos` (`categoria_id`, `destaque`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (995.3ms)[0m  [1m[35mALTER TABLE `produtos` ADD CONSTRAINT produtos_preco_nao_negativo CHECK (preco_centavos >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (1038.3ms)[0m  [1m[35mALTER TABLE `produtos` ADD CONSTRAINT produtos_custo_nao_negativo CHECK (custo_centavos >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (1196.0ms)[0m  [1m[35mALTER TABLE `produtos` ADD CONSTRAINT produtos_estoque_nao_negativo CHECK (estoque >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (315.0ms)[0m  [1m[35mCREATE TABLE `imagens_produto` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `produto_id` bigint NOT NULL, `texto_alternativo` varchar(255) NOT NULL, `posicao` int DEFAULT 0 NOT NULL, `principal` boolean DEFAULT FALSE NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_imagens_produto_on_produto_id` (`produto_id`), CONSTRAINT `fk_rails_bee8c869ca`
+FOREIGN KEY (`produto_id`)
+  REFERENCES `produtos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (760.8ms)[0m  [1m[35mCREATE INDEX `index_imagens_produto_on_produto_id_and_posicao` ON `imagens_produto` (`produto_id`, `posicao`) /*application='UseChaos'*/[0m
+  [1m[35m (372.7ms)[0m  [1m[35mCREATE TABLE `movimentacoes_estoque` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `produto_id` bigint NOT NULL, `usuario_administrativo_id` bigint, `tipo` varchar(255) NOT NULL, `quantidade_anterior` int NOT NULL, `quantidade_nova` int NOT NULL, `motivo` varchar(255) NOT NULL, `origem_type` varchar(255), `origem_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_movimentacoes_estoque_on_produto_id` (`produto_id`), INDEX `index_movimentacoes_estoque_on_usuario_administrativo_id` (`usuario_administrativo_id`), CONSTRAINT `fk_rails_2a5906a863`
+FOREIGN KEY (`produto_id`)
+  REFERENCES `produtos` (`id`)
+, CONSTRAINT `fk_rails_78f6c7b9e1`
+FOREIGN KEY (`usuario_administrativo_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (618.3ms)[0m  [1m[35mCREATE INDEX `index_movimentacoes_estoque_on_origem_type_and_origem_id` ON `movimentacoes_estoque` (`origem_type`, `origem_id`) /*application='UseChaos'*/[0m
+  [1m[35m (472.4ms)[0m  [1m[35mCREATE INDEX `index_movimentacoes_estoque_on_produto_id_and_created_at` ON `movimentacoes_estoque` (`produto_id`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (939.0ms)[0m  [1m[35mALTER TABLE `movimentacoes_estoque` ADD CONSTRAINT movimentacao_anterior_nao_negativa CHECK (quantidade_anterior >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (811.7ms)[0m  [1m[35mALTER TABLE `movimentacoes_estoque` ADD CONSTRAINT movimentacao_nova_nao_negativa CHECK (quantidade_nova >= 0) /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (80.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260731041100') RETURNING `version` /*application='UseChaos'*/[0m
+Migrating to CriarCarrinhosEPedidos (20260731041200)
+  [1m[35m (273.0ms)[0m  [1m[35mCREATE TABLE `carrinhos` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `token` varchar(255) NOT NULL, `expira_em` datetime(6) NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='UseChaos'*/[0m
+  [1m[35m (605.0ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_carrinhos_on_token` ON `carrinhos` (`token`) /*application='UseChaos'*/[0m
+  [1m[35m (610.3ms)[0m  [1m[35mCREATE INDEX `index_carrinhos_on_expira_em` ON `carrinhos` (`expira_em`) /*application='UseChaos'*/[0m
+  [1m[35m (418.8ms)[0m  [1m[35mCREATE TABLE `itens_carrinho` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `carrinho_id` bigint NOT NULL, `produto_id` bigint NOT NULL, `quantidade` int NOT NULL, `preco_unitario_centavos_observado` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_itens_carrinho_on_carrinho_id` (`carrinho_id`), INDEX `index_itens_carrinho_on_produto_id` (`produto_id`), CONSTRAINT `fk_rails_91c14758da`
+FOREIGN KEY (`carrinho_id`)
+  REFERENCES `carrinhos` (`id`)
+, CONSTRAINT `fk_rails_5442124134`
+FOREIGN KEY (`produto_id`)
+  REFERENCES `produtos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (579.7ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_itens_carrinho_on_carrinho_id_and_produto_id` ON `itens_carrinho` (`carrinho_id`, `produto_id`) /*application='UseChaos'*/[0m
+  [1m[35m (1157.6ms)[0m  [1m[35mALTER TABLE `itens_carrinho` ADD CONSTRAINT item_carrinho_quantidade_positiva CHECK (quantidade > 0) /*application='UseChaos'*/[0m
+  [1m[35m (556.7ms)[0m  [1m[35mCREATE TABLE `pedidos` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `numero` varchar(255) NOT NULL, `chave_idempotencia` varchar(255) NOT NULL, `situacao` varchar(255) DEFAULT 'iniciado' NOT NULL, `nome_cliente` varchar(255) NOT NULL, `contato_cliente` varchar(255) NOT NULL, `aceite_privacidade` boolean DEFAULT FALSE NOT NULL, `total_centavos` bigint DEFAULT 0 NOT NULL, `estoque_movimentado` boolean DEFAULT FALSE NOT NULL, `estoque_reposto` boolean DEFAULT FALSE NOT NULL, `confirmado_em` datetime(6), `concluido_em` datetime(6), `cancelado_em` datetime(6), `responsavel_id` bigint, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_pedidos_on_responsavel_id` (`responsavel_id`), CONSTRAINT `fk_rails_53777b709b`
+FOREIGN KEY (`responsavel_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (648.2ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_pedidos_on_numero` ON `pedidos` (`numero`) /*application='UseChaos'*/[0m
+  [1m[35m (480.8ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_pedidos_on_chave_idempotencia` ON `pedidos` (`chave_idempotencia`) /*application='UseChaos'*/[0m
+  [1m[35m (620.5ms)[0m  [1m[35mCREATE INDEX `index_pedidos_on_situacao_and_created_at` ON `pedidos` (`situacao`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (538.8ms)[0m  [1m[35mCREATE INDEX `index_pedidos_on_confirmado_em` ON `pedidos` (`confirmado_em`) /*application='UseChaos'*/[0m
+  [1m[35m (549.7ms)[0m  [1m[35mCREATE INDEX `index_pedidos_on_contato_cliente` ON `pedidos` (`contato_cliente`) /*application='UseChaos'*/[0m
+  [1m[35m (1109.2ms)[0m  [1m[35mALTER TABLE `pedidos` ADD CONSTRAINT pedidos_total_nao_negativo CHECK (total_centavos >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (480.1ms)[0m  [1m[35mCREATE TABLE `itens_pedido` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `pedido_id` bigint NOT NULL, `produto_id` bigint NOT NULL, `categoria_id` bigint NOT NULL, `produto_nome` varchar(255) NOT NULL, `produto_sku` varchar(255) NOT NULL, `categoria_nome` varchar(255) NOT NULL, `quantidade` int NOT NULL, `preco_unitario_centavos` bigint NOT NULL, `custo_unitario_centavos` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_itens_pedido_on_pedido_id` (`pedido_id`), INDEX `index_itens_pedido_on_produto_id` (`produto_id`), INDEX `index_itens_pedido_on_categoria_id` (`categoria_id`), CONSTRAINT `fk_rails_fd634cdfe2`
+FOREIGN KEY (`pedido_id`)
+  REFERENCES `pedidos` (`id`)
+, CONSTRAINT `fk_rails_af79b49747`
+FOREIGN KEY (`produto_id`)
+  REFERENCES `produtos` (`id`)
+, CONSTRAINT `fk_rails_49521eabff`
+FOREIGN KEY (`categoria_id`)
+  REFERENCES `categorias` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (495.6ms)[0m  [1m[35mCREATE INDEX `index_itens_pedido_on_pedido_id_and_produto_id` ON `itens_pedido` (`pedido_id`, `produto_id`) /*application='UseChaos'*/[0m
+  [1m[35m (546.7ms)[0m  [1m[35mCREATE INDEX `index_itens_pedido_on_categoria_id_and_produto_id` ON `itens_pedido` (`categoria_id`, `produto_id`) /*application='UseChaos'*/[0m
+  [1m[35m (994.9ms)[0m  [1m[35mALTER TABLE `itens_pedido` ADD CONSTRAINT item_pedido_quantidade_positiva CHECK (quantidade > 0) /*application='UseChaos'*/[0m
+  [1m[35m (1142.1ms)[0m  [1m[35mALTER TABLE `itens_pedido` ADD CONSTRAINT item_pedido_preco_nao_negativo CHECK (preco_unitario_centavos >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (1193.7ms)[0m  [1m[35mALTER TABLE `itens_pedido` ADD CONSTRAINT item_pedido_custo_nao_negativo CHECK (custo_unitario_centavos >= 0) /*application='UseChaos'*/[0m
+  [1m[35m (350.2ms)[0m  [1m[35mCREATE TABLE `historicos_pedido` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `pedido_id` bigint NOT NULL, `usuario_administrativo_id` bigint, `situacao_anterior` varchar(255), `situacao_nova` varchar(255) NOT NULL, `observacao` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_historicos_pedido_on_pedido_id` (`pedido_id`), INDEX `index_historicos_pedido_on_usuario_administrativo_id` (`usuario_administrativo_id`), CONSTRAINT `fk_rails_e6a96b2000`
+FOREIGN KEY (`pedido_id`)
+  REFERENCES `pedidos` (`id`)
+, CONSTRAINT `fk_rails_98fab09f92`
+FOREIGN KEY (`usuario_administrativo_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (594.9ms)[0m  [1m[35mCREATE INDEX `index_historicos_pedido_on_pedido_id_and_created_at` ON `historicos_pedido` (`pedido_id`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (34.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260731041200') RETURNING `version` /*application='UseChaos'*/[0m
+Migrating to CriarAvaliacoesManifestacoesERelatorios (20260731041300)
+  [1m[35m (314.1ms)[0m  [1m[35mCREATE TABLE `avaliacoes` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `produto_id` bigint NOT NULL, `nome_autor` varchar(255), `nota` int NOT NULL, `comentario` text NOT NULL, `situacao` varchar(255) DEFAULT 'pendente' NOT NULL, `moderada_por_id` bigint, `moderada_em` datetime(6), `origem_hash` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_avaliacoes_on_produto_id` (`produto_id`), INDEX `index_avaliacoes_on_moderada_por_id` (`moderada_por_id`), CONSTRAINT `fk_rails_84bb979a66`
+FOREIGN KEY (`produto_id`)
+  REFERENCES `produtos` (`id`)
+, CONSTRAINT `fk_rails_3a9053d97b`
+FOREIGN KEY (`moderada_por_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (549.1ms)[0m  [1m[35mCREATE INDEX `index_avaliacoes_on_produto_id_and_situacao_and_created_at` ON `avaliacoes` (`produto_id`, `situacao`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (541.6ms)[0m  [1m[35mCREATE INDEX `index_avaliacoes_on_origem_hash` ON `avaliacoes` (`origem_hash`) /*application='UseChaos'*/[0m
+  [1m[35m (920.9ms)[0m  [1m[35mALTER TABLE `avaliacoes` ADD CONSTRAINT avaliacoes_nota_valida CHECK (nota BETWEEN 1 AND 5) /*application='UseChaos'*/[0m
+  [1m[35m (296.7ms)[0m  [1m[35mCREATE TABLE `manifestacoes` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `tipo` varchar(255) NOT NULL, `categoria` varchar(255) NOT NULL, `mensagem` text NOT NULL, `contato` varchar(255), `situacao` varchar(255) DEFAULT 'nova' NOT NULL, `responsavel_id` bigint, `observacao_interna` text, `origem_hash` varchar(255), `tratada_em` datetime(6), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_manifestacoes_on_responsavel_id` (`responsavel_id`), CONSTRAINT `fk_rails_2d922dc056`
+FOREIGN KEY (`responsavel_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (781.1ms)[0m  [1m[35mCREATE INDEX `index_manifestacoes_on_tipo_and_situacao_and_created_at` ON `manifestacoes` (`tipo`, `situacao`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (610.3ms)[0m  [1m[35mCREATE INDEX `index_manifestacoes_on_origem_hash` ON `manifestacoes` (`origem_hash`) /*application='UseChaos'*/[0m
+  [1m[35m (393.2ms)[0m  [1m[35mCREATE TABLE `historicos_manifestacao` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `manifestacao_id` bigint NOT NULL, `usuario_administrativo_id` bigint, `situacao_anterior` varchar(255), `situacao_nova` varchar(255) NOT NULL, `observacao` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_historicos_manifestacao_on_manifestacao_id` (`manifestacao_id`), INDEX `index_historicos_manifestacao_on_usuario_administrativo_id` (`usuario_administrativo_id`), CONSTRAINT `fk_rails_5d29aa3a5e`
+FOREIGN KEY (`manifestacao_id`)
+  REFERENCES `manifestacoes` (`id`)
+, CONSTRAINT `fk_rails_1b9c02a004`
+FOREIGN KEY (`usuario_administrativo_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (572.0ms)[0m  [1m[35mCREATE INDEX `idx_historicos_manifestacao_cronologia` ON `historicos_manifestacao` (`manifestacao_id`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (398.1ms)[0m  [1m[35mCREATE TABLE `geracoes_relatorio` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `usuario_administrativo_id` bigint NOT NULL, `formato` varchar(255) NOT NULL, `situacao` varchar(255) DEFAULT 'pendente' NOT NULL, `filtros` json NOT NULL, `gerado_em` datetime(6), `erro` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_geracoes_relatorio_on_usuario_administrativo_id` (`usuario_administrativo_id`), CONSTRAINT `fk_rails_cc91148620`
+FOREIGN KEY (`usuario_administrativo_id`)
+  REFERENCES `usuarios_administrativos` (`id`)
+) /*application='UseChaos'*/[0m
+  [1m[35m (469.9ms)[0m  [1m[35mCREATE INDEX `idx_geracoes_relatorio_usuario` ON `geracoes_relatorio` (`usuario_administrativo_id`, `created_at`) /*application='UseChaos'*/[0m
+  [1m[35m (643.7ms)[0m  [1m[35mCREATE INDEX `index_geracoes_relatorio_on_situacao` ON `geracoes_relatorio` (`situacao`) /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (34.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260731041300') RETURNING `version` /*application='UseChaos'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('929018082984190920') /*application='UseChaos'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='UseChaos'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='UseChaos'*/[0m
+  [1m[36mPerfil Load (0.2ms)[0m  [1m[34mSELECT `perfis`.* FROM `perfis` WHERE `perfis`.`nome` = 'administrador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mPerfil Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `perfis` WHERE `perfis`.`nome` = 'administrador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='UseChaos'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[36mPerfil Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `perfis` WHERE `perfis`.`nome` = 'x' LIMIT 1 /*application='UseChaos'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='UseChaos'*/[0m
+  [1m[36mPerfil Load (0.2ms)[0m  [1m[34mSELECT `perfis`.* FROM `perfis` WHERE `perfis`.`nome` = 'administrador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mPerfil Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `perfis` WHERE `perfis`.`nome` = 'administrador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mPerfil Create (0.2ms)[0m  [1m[32mINSERT INTO `perfis` (`nome`, `permissoes`, `created_at`, `updated_at`) VALUES ('administrador', '[\"*\"]', '2026-07-31 04:16:41.900211', '2026-07-31 04:16:41.900211') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (38.5ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mPerfil Load (0.2ms)[0m  [1m[34mSELECT `perfis`.* FROM `perfis` WHERE `perfis`.`nome` = 'atendimento' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mPerfil Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `perfis` WHERE `perfis`.`nome` = 'atendimento' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mPerfil Create (0.2ms)[0m  [1m[32mINSERT INTO `perfis` (`nome`, `permissoes`, `created_at`, `updated_at`) VALUES ('atendimento', '[\"gerenciar_pedidos\",\"visualizar_dados_pessoais\"]', '2026-07-31 04:16:41.945000', '2026-07-31 04:16:41.945000') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (85.4ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mPerfil Load (0.2ms)[0m  [1m[34mSELECT `perfis`.* FROM `perfis` WHERE `perfis`.`nome` = 'gestor' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mPerfil Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `perfis` WHERE `perfis`.`nome` = 'gestor' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mPerfil Create (0.2ms)[0m  [1m[32mINSERT INTO `perfis` (`nome`, `permissoes`, `created_at`, `updated_at`) VALUES ('gestor', '[\"gerar_relatorios\",\"gerenciar_catalogo\",\"visualizar_metricas\"]', '2026-07-31 04:16:42.036627', '2026-07-31 04:16:42.036627') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (66.7ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mPerfil Load (0.2ms)[0m  [1m[34mSELECT `perfis`.* FROM `perfis` WHERE `perfis`.`nome` = 'moderador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mPerfil Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `perfis` WHERE `perfis`.`nome` = 'moderador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mPerfil Create (0.2ms)[0m  [1m[32mINSERT INTO `perfis` (`nome`, `permissoes`, `created_at`, `updated_at`) VALUES ('moderador', '[\"moderar_conteudo\",\"visualizar_dados_pessoais\"]', '2026-07-31 04:16:42.109269', '2026-07-31 04:16:42.109269') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (35.9ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mUsuarioAdministrativo Load (0.2ms)[0m  [1m[34mSELECT `usuarios_administrativos`.* FROM `usuarios_administrativos` WHERE `usuarios_administrativos`.`email` = 'admin@oculosneon.test' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mPerfil Load (0.2ms)[0m  [1m[34mSELECT `perfis`.* FROM `perfis` WHERE `perfis`.`nome` = 'administrador' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mUsuarioAdministrativo Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `usuarios_administrativos` WHERE `usuarios_administrativos`.`email` = CAST('admin@oculosneon.test' AS BINARY) LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mUsuarioAdministrativo Create (0.3ms)[0m  [1m[32mINSERT INTO `usuarios_administrativos` (`nome`, `perfil_id`, `ativo`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `created_at`, `updated_at`) VALUES ('Administrador', 1, TRUE, 'admin@oculosneon.test', '$2a$12$sMYRKSqE61okLOI4RZnt6OWu5HOaQKtET7zEHSFrexmPBLXGS4IVW', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, '2026-07-31 04:16:42.317502', '2026-07-31 04:16:42.317502') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (36.1ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mCategoria Load (0.2ms)[0m  [1m[34mSELECT `categorias`.* FROM `categorias` WHERE `categorias`.`slug` = 'oculos-de-sol' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mCategoria Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `categorias` WHERE `categorias`.`nome` = 'Óculos de sol' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `categorias` WHERE `categorias`.`slug` = 'oculos-de-sol' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Create (0.2ms)[0m  [1m[32mINSERT INTO `categorias` (`nome`, `slug`, `descricao`, `ativa`, `posicao`, `created_at`, `updated_at`) VALUES ('Óculos de sol', 'oculos-de-sol', 'Proteção e atitude para dias luminosos.', TRUE, 0, '2026-07-31 04:16:42.364315', '2026-07-31 04:16:42.364315') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (25.3ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mCategoria Load (0.2ms)[0m  [1m[34mSELECT `categorias`.* FROM `categorias` WHERE `categorias`.`slug` = 'oculos-para-corrida' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mCategoria Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `categorias` WHERE `categorias`.`nome` = 'Óculos para corrida' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `categorias` WHERE `categorias`.`slug` = 'oculos-para-corrida' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Create (0.2ms)[0m  [1m[32mINSERT INTO `categorias` (`nome`, `slug`, `descricao`, `ativa`, `posicao`, `created_at`, `updated_at`) VALUES ('Óculos para corrida', 'oculos-para-corrida', 'Leveza e estabilidade para acompanhar seu ritmo.', TRUE, 1, '2026-07-31 04:16:42.396898', '2026-07-31 04:16:42.396898') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (25.6ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mCategoria Load (0.2ms)[0m  [1m[34mSELECT `categorias`.* FROM `categorias` WHERE `categorias`.`slug` = 'oculos-casuais' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mCategoria Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `categorias` WHERE `categorias`.`nome` = 'Óculos casuais' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `categorias` WHERE `categorias`.`slug` = 'oculos-casuais' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Create (0.2ms)[0m  [1m[32mINSERT INTO `categorias` (`nome`, `slug`, `descricao`, `ativa`, `posicao`, `created_at`, `updated_at`) VALUES ('Óculos casuais', 'oculos-casuais', 'Modelos versáteis para todos os dias.', TRUE, 2, '2026-07-31 04:16:42.428659', '2026-07-31 04:16:42.428659') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (29.9ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mProduto Load (0.2ms)[0m  [1m[34mSELECT `produtos`.* FROM `produtos` WHERE `produtos`.`sku` = 'ON-SOL-001' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mProduto Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `produtos` WHERE `produtos`.`slug` = 'eclipse-roxo' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mProduto Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `produtos` WHERE `produtos`.`sku` = 'ON-SOL-001' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mProduto Create (0.2ms)[0m  [1m[32mINSERT INTO `produtos` (`categoria_id`, `nome`, `slug`, `sku`, `descricao`, `caracteristicas`, `preco_centavos`, `custo_centavos`, `estoque`, `limiar_estoque_baixo`, `ativo`, `publicado`, `disponivel`, `destaque`, `lancamento_em`, `created_at`, `updated_at`) VALUES (1, 'Eclipse Roxo', 'eclipse-roxo', 'ON-SOL-001', 'Modelo demonstrativo Eclipse Roxo, criado sem dados pessoais reais.', '[\"Proteção UV\",\"Armação leve\"]', 29990, 12000, 15, NULL, TRUE, TRUE, TRUE, TRUE, '2026-07-31 04:16:42.470421', '2026-07-31 04:16:42.473029', '2026-07-31 04:16:42.473029') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (46.6ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mProduto Load (0.2ms)[0m  [1m[34mSELECT `produtos`.* FROM `produtos` WHERE `produtos`.`sku` = 'ON-COR-001' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mProduto Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `produtos` WHERE `produtos`.`slug` = 'velocity-neon' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mProduto Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `produtos` WHERE `produtos`.`sku` = 'ON-COR-001' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mProduto Create (0.2ms)[0m  [1m[32mINSERT INTO `produtos` (`categoria_id`, `nome`, `slug`, `sku`, `descricao`, `caracteristicas`, `preco_centavos`, `custo_centavos`, `estoque`, `limiar_estoque_baixo`, `ativo`, `publicado`, `disponivel`, `destaque`, `lancamento_em`, `created_at`, `updated_at`) VALUES (2, 'Velocity Neon', 'velocity-neon', 'ON-COR-001', 'Modelo demonstrativo Velocity Neon, criado sem dados pessoais reais.', '[\"Proteção UV\",\"Armação leve\"]', 34990, 14500, 8, NULL, TRUE, TRUE, TRUE, FALSE, '2026-07-30 04:16:42.522794', '2026-07-31 04:16:42.526611', '2026-07-31 04:16:42.526611') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (92.2ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+  [1m[36mProduto Load (0.3ms)[0m  [1m[34mSELECT `produtos`.* FROM `produtos` WHERE `produtos`.`sku` = 'ON-CAS-001' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='UseChaos'*/[0m
+  [1m[36mProduto Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `produtos` WHERE `produtos`.`slug` = 'orbita-urbana' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mProduto Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `produtos` WHERE `produtos`.`sku` = 'ON-CAS-001' LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mProduto Create (0.2ms)[0m  [1m[32mINSERT INTO `produtos` (`categoria_id`, `nome`, `slug`, `sku`, `descricao`, `caracteristicas`, `preco_centavos`, `custo_centavos`, `estoque`, `limiar_estoque_baixo`, `ativo`, `publicado`, `disponivel`, `destaque`, `lancamento_em`, `created_at`, `updated_at`) VALUES (3, 'Órbita Urbana', 'orbita-urbana', 'ON-CAS-001', 'Modelo demonstrativo Órbita Urbana, criado sem dados pessoais reais.', '[\"Proteção UV\",\"Armação leve\"]', 24990, 10000, 4, NULL, TRUE, TRUE, TRUE, FALSE, '2026-07-29 04:16:42.655461', '2026-07-31 04:16:42.660546', '2026-07-31 04:16:42.660546') RETURNING `id` /*application='UseChaos'*/[0m
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[35mCOMMIT /*application='UseChaos'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[36mPerfil Count (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `perfis` /*application='UseChaos'*/[0m
+  [1m[36mUsuarioAdministrativo Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `usuarios_administrativos` /*application='UseChaos'*/[0m
+  [1m[36mCategoria Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `categorias` /*application='UseChaos'*/[0m
+  [1m[36mProduto Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `produtos` /*application='UseChaos'*/[0m
+  [1m[36mProduto Load (0.2ms)[0m  [1m[34mSELECT `produtos`.* FROM `produtos` ORDER BY `produtos`.`id` ASC LIMIT 1 /*application='UseChaos'*/[0m
+  [1m[36mCategoria Load (0.2ms)[0m  [1m[34mSELECT `categorias`.* FROM `categorias` WHERE `categorias`.`id` = 1 LIMIT 1 /*application='UseChaos'*/[0m
+  ↳ app/models/produto.rb:30:in 'Produto#compravel?'
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.

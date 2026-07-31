@@ -1,0 +1,9 @@
+<h1>Geração de relatório</h1>
+<div class="card card-neon"><div class="card-body">
+  <dl class="row">
+    <dt class="col-sm-3">Formato</dt><dd class="col-sm-9"><%= @geracao.formato.upcase %></dd>
+    <dt class="col-sm-3">Situação</dt><dd class="col-sm-9"><%= @geracao.situacao.humanize %></dd>
+    <dt class="col-sm-3">Solicitado em</dt><dd class="col-sm-9"><%= l @geracao.created_at, format: :long %></dd>
+  </dl>
+  <% if @geracao.falhou? %><div class="alert alert-danger">A geração falhou. Tente novamente ou contate a administração.</div><% elsif !@geracao.concluida? %><p class="texto-suave">O arquivo ainda está sendo processado. Atualize esta página em alguns instantes.</p><% end %>
+</div></div>

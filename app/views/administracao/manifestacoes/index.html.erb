@@ -1,0 +1,13 @@
+<h1>Manifestações</h1>
+<p class="texto-suave">Sugestões e feedbacks enviados pelo público.</p>
+<%= form_with url: administracao_manifestacoes_path, method: :get, class: "card card-neon mb-4" do |form| %>
+  <div class="card-body row g-3 align-items-end">
+    <div class="col-md-5"><%= form.label :tipo, class: "form-label" %><%= form.select :tipo, [["Todos", ""], ["Sugestão", "sugestao"], ["Feedback", "feedback"]], { selected: params[:tipo] }, class: "form-select" %></div>
+    <div class="col-md-5"><%= form.label :situacao, "Situação", class: "form-label" %><%= form.select :situacao, [["Todas", ""], ["Nova", "nova"], ["Em análise", "em_analise"], ["Tratada", "tratada"], ["Arquivada", "arquivada"]], { selected: params[:situacao] }, class: "form-select" %></div>
+    <div class="col-md-2"><%= form.submit "Filtrar", class: "btn btn-outline-light w-100" %></div>
+  </div>
+<% end %>
+<div class="card card-neon"><div class="tabela-responsiva"><table class="table card-table">
+  <thead><tr><th>Tipo</th><th>Categoria</th><th>Recebida em</th><th>Situação</th><th></th></tr></thead>
+  <tbody><% @manifestacoes.each do |manifestacao| %><tr><td><%= manifestacao.tipo.humanize %></td><td><%= manifestacao.categoria %></td><td><%= l manifestacao.created_at, format: :short %></td><td><%= badge_situacao(manifestacao.situacao) %></td><td class="text-end"><%= link_to "Abrir", administracao_manifestacao_path(manifestacao), class: "btn btn-sm btn-outline-light" %></td></tr><% end %></tbody>
+</table></div></div>

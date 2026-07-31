@@ -1,0 +1,53 @@
+<% content_for :title, "#{@produto.nome} · Óculos Neon" %>
+<% content_for :meta_description, truncate(strip_tags(@produto.descricao), length: 155) %>
+<% content_for :head do %><link rel="canonical" href="<%= produto_url(@produto.slug) %>"><% end %>
+
+<div class="row g-4 g-lg-5">
+  <section class="col-lg-7" aria-label="Galeria do produto">
+    <% if @produto.imagens_produto.any? { |imagem| imagem.arquivo.attached? } %>
+      <div class="row g-3"><% @produto.imagens_produto.each do |imagem| %><% if imagem.arquivo.attached? %><div class="col-12"><%= image_tag imagem.arquivo, alt: imagem.texto_alternativo, class: "img-fluid rounded card-neon", width: 960, height: 640 %></div><% end %><% end %></div>
+    <% else %>
+      <div class="ratio ratio-4x3 card card-neon"><span class="m-auto texto-suave">Imagem em breve</span></div>
+    <% end %>
+  </section>
+  <section class="col-lg-5">
+    <span class="text-orange"><%= @produto.categoria.nome %></span>
+    <h1 class="display-4"><%= @produto.nome %></h1>
+    <p class="texto-suave"><%= @produto.sku %></p>
+    <div class="display-5 fw-bold mb-4"><%= moeda_centavos(@produto.preco_centavos) %></div>
+    <%= simple_format @produto.descricao, class: "lead" %>
+
+    <% if @produto.compravel? %>
+      <%= form_with url: itens_carrinho_path, class: "card card-neon mt-4" do |form| %>
+        <div class="card-body">
+          <%= form.hidden_field :produto_id, value: @produto.id %>
+          <%= form.label :quantidade, class: "form-label" %>
+          <div class="input-group"><%= form.number_field :quantidade, value: 1, min: 1, max: @produto.estoque, class: "form-control", required: true %><%= form.submit "Adicionar ao carrinho", class: "btn btn-neon" %></div>
+        </div>
+      <% end %>
+    <% elsif @produto.sem_estoque? %>
+      <div class="alert alert-warning mt-4">Este modelo está sem estoque no momento.</div>
+    <% else %>
+      <div class="alert alert-secondary mt-4">Este modelo está temporariamente indisponível.</div>
+    <% end %>
+
+    <% if @produto.caracteristicas.present? %>
+      <h2 class="h3 mt-5">Características</h2><ul><% @produto.caracteristicas.each do |item| %><li><%= item %></li><% end %></ul>
+    <% end %>
+  </section>
+</div>
+
+<section class="mt-5" aria-labelledby="titulo-avaliacoes">
+  <h2 id="titulo-avaliacoes">Avaliações</h2>
+  <% if @avaliacoes.any? %>
+    <p><strong><%= number_with_precision(@produto.avaliacao_media, precision: 1) %>/5</strong> em <%= @produto.quantidade_avaliacoes %> avaliações aprovadas</p>
+    <div class="row row-cards"><% @avaliacoes.each do |avaliacao| %><div class="col-md-6"><article class="card card-neon h-100"><div class="card-body"><strong><%= avaliacao.nota %>/5</strong><p class="mt-2 mb-1"><%= avaliacao.comentario %></p><small class="texto-suave"><%= avaliacao.nome_autor.presence || "Visitante" %></small></div></article></div><% end %></div>
+  <% else %>
+    <p class="texto-suave">Ainda não existem avaliações aprovadas.</p>
+  <% end %>
+  <%= render "publico/avaliacoes/form", produto: @produto, avaliacao: Avaliacao.new %>
+</section>
+
+<% if @relacionados.any? %>
+  <section class="mt-5" aria-labelledby="titulo-relacionados"><h2 id="titulo-relacionados">Produtos relacionados</h2><div class="row row-cards"><% @relacionados.each do |produto| %><div class="col-sm-6 col-xl-3"><%= render "card", produto: %></div><% end %></div></section>
+<% end %>

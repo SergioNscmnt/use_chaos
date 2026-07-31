@@ -1,0 +1,37 @@
+<%= turbo_frame_tag "carrinho", target: "_top" do %>
+  <% if carrinho.itens_carrinho.any? %>
+    <div class="card card-neon">
+      <div class="tabela-responsiva">
+        <table class="table table-vcenter card-table">
+          <thead><tr><th>Produto</th><th>Preço</th><th>Quantidade</th><th>Subtotal</th><th></th></tr></thead>
+          <tbody>
+            <% carrinho.itens_carrinho.includes(produto: :categoria).each do |item| %>
+              <tr class="<%= "table-warning" unless item.elegivel? %>">
+                <td><strong><%= item.produto.nome %></strong><% unless item.elegivel? %><br><small>Preço, disponibilidade ou estoque mudou. Atualize o carrinho.</small><% end %></td>
+                <td><%= moeda_centavos(item.preco_unitario_centavos_observado) %></td>
+                <td>
+                  <%= form_with url: item_carrinho_path(item), method: :patch, class: "d-flex gap-2" do |form| %>
+                    <%= form.number_field :quantidade, value: item.quantidade, min: 1, max: item.produto.estoque, class: "form-control", style: "max-width: 6rem", aria: { label: "Quantidade de #{item.produto.nome}" } %>
+                    <%= form.submit "Atualizar", class: "btn btn-sm btn-outline-light" %>
+                  <% end %>
+                </td>
+                <td><%= moeda_centavos(item.subtotal_centavos) %></td>
+                <td><%= button_to "Remover", item_carrinho_path(item), method: :delete, class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: "Remover este item?" } } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div><span class="texto-suave">Total estimado</span><div class="h2 mb-0"><%= moeda_centavos(carrinho.total_centavos) %></div></div>
+        <% if carrinho.elegivel_para_checkout? %>
+          <%= link_to "Continuar pelo WhatsApp", new_checkout_path, class: "btn btn-destaque btn-lg" %>
+        <% else %>
+          <span class="text-warning">Corrija os itens destacados para continuar.</span>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <%= render "shared/estado_vazio", titulo: "Seu carrinho está vazio", mensagem: "Explore o catálogo e escolha seus próximos óculos.", acao_texto: "Ver catálogo", acao_url: produtos_path %>
+  <% end %>
+<% end %>

@@ -1,0 +1,25 @@
+<% content_for :title, "Checkout pelo WhatsApp" %>
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <h1>Continuar pelo WhatsApp</h1>
+    <p class="texto-suave">Criaremos um número de pedido antes de abrir a conversa. Nenhum pagamento acontece neste site.</p>
+    <%= render "shared/erros_formulario", objeto: @pedido %>
+    <%= form_with scope: :checkout, url: checkout_path, class: "card card-neon" do |form| %>
+      <%= form.hidden_field :chave_idempotencia, value: @chave_idempotencia %>
+      <div class="card-body row g-3">
+        <div class="col-md-6"><%= form.label :nome_cliente, "Nome", class: "form-label" %><%= form.text_field :nome_cliente, value: @pedido.nome_cliente, maxlength: 120, autocomplete: "name", class: "form-control", required: true %></div>
+        <div class="col-md-6"><%= form.label :contato_cliente, "Telefone ou e-mail", class: "form-label" %><%= form.text_field :contato_cliente, value: @pedido.contato_cliente, maxlength: 180, autocomplete: "tel", class: "form-control", required: true %></div>
+        <div class="col-12">
+          <label class="form-check">
+            <%= form.check_box :aceite_privacidade, required: true, class: "form-check-input" %>
+            <span class="form-check-label">Concordo com o uso destes dados exclusivamente para identificar o pedido e continuar o atendimento.</span>
+          </label>
+        </div>
+      </div>
+      <div class="card-footer d-flex flex-wrap gap-3 align-items-center">
+        <%= form.submit "Criar pedido e abrir WhatsApp", class: "btn btn-destaque btn-lg" %>
+        <%= link_to "Voltar ao carrinho", carrinho_path, class: "btn btn-link" %>
+      </div>
+    <% end %>
+  </div>
+</div>

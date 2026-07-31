@@ -1,0 +1,19 @@
+"pt-BR":
+  devise:
+    failure:
+      inactive: "Sua conta está inativa."
+      invalid: "E-mail ou senha inválidos."
+      not_found_in_database: "E-mail ou senha inválidos."
+      timeout: "Sua sessão expirou. Entre novamente."
+      unauthenticated: "Você precisa entrar para continuar."
+    sessions:
+      signed_in: "Acesso realizado com sucesso."
+      signed_out: "Sessão encerrada."
+    passwords:
+      send_instructions: "Você receberá instruções para redefinir sua senha."
+      updated: "Sua senha foi alterada."
+  errors:
+    messages:
+      not_saved:
+        one: "Não foi possível salvar: 1 erro."
+        other: "Não foi possível salvar: %{count} erros."

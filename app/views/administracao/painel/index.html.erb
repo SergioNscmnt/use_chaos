@@ -1,0 +1,29 @@
+<% content_for :title, "Painel administrativo" %>
+<div class="page-header mb-4"><h1>Painel gerencial</h1><p class="texto-suave">Vendas consideram apenas pedidos confirmados ou concluídos.</p></div>
+<%= form_with url: administracao_root_path, method: :get, class: "card card-neon mb-4" do |form| %>
+  <div class="card-body row g-3 align-items-end">
+    <div class="col-md-2"><%= form.label :inicio, "De", class: "form-label" %><%= form.date_field :inicio, value: @filtros.inicio, class: "form-control" %></div>
+    <div class="col-md-2"><%= form.label :fim, "Até", class: "form-label" %><%= form.date_field :fim, value: @filtros.fim, class: "form-control" %></div>
+    <div class="col-md-3"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, @categorias, :id, :nome, { include_blank: "Todas", selected: @filtros.categoria_id }, class: "form-select" %></div>
+    <div class="col-md-3"><%= form.label :produto_id, "Produto", class: "form-label" %><%= form.collection_select :produto_id, @produtos, :id, :nome, { include_blank: "Todos", selected: @filtros.produto_id }, class: "form-select" %></div>
+    <div class="col-md-2"><%= form.submit "Aplicar", class: "btn btn-neon w-100" %></div>
+  </div>
+<% end %>
+<div class="row row-cards mb-4">
+  <% [
+    ["Vendas", @resumo[:quantidade_vendas]],
+    ["Receita bruta", moeda_centavos(@resumo[:receita_bruta_centavos])],
+    ["Custo", moeda_centavos(@resumo[:custo_centavos])],
+    [@resumo[:lucro_bruto_centavos].negative? ? "Prejuízo" : "Lucro bruto", moeda_centavos(@resumo[:lucro_bruto_centavos].abs)],
+    ["Margem", number_to_percentage(@resumo[:margem_percentual], precision: 2)],
+    ["Ticket médio", moeda_centavos(@resumo[:ticket_medio_centavos])],
+    ["Conversão", number_to_percentage(@resumo[:conversao_percentual], precision: 2)],
+    ["Cancelados", @resumo[:pedidos_cancelados]]
+  ].each do |rotulo, valor| %>
+    <div class="col-sm-6 col-xl-3"><div class="card card-neon h-100"><div class="card-body"><span class="texto-suave"><%= rotulo %></span><div class="h2 mt-2"><%= valor %></div></div></div></div>
+  <% end %>
+</div>
+<div class="row row-cards">
+  <div class="col-lg-6"><div class="card card-neon h-100"><div class="card-header"><h2 class="card-title">Mais vendidos</h2></div><div class="card-body"><ol><% @metricas.produtos_mais_vendidos.each do |(_id, nome), quantidade| %><li class="mb-2"><%= nome %> <span class="badge bg-purple-lt"><%= quantidade %></span></li><% end %></ol></div></div></div>
+  <div class="col-lg-6"><div class="card card-neon h-100"><div class="card-header"><h2 class="card-title">Estoque baixo</h2></div><div class="card-body"><ul><% @metricas.estoque_baixo.each do |produto| %><li class="mb-2"><%= produto.nome %> <span class="badge bg-orange-lt"><%= produto.estoque %></span></li><% end %></ul></div></div></div>
+</div>

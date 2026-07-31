@@ -1,0 +1,15 @@
+<h1>Pedidos</h1><p class="texto-suave">Acompanhe o atendimento iniciado pelo catálogo.</p>
+<%= form_with url: administracao_pedidos_path, method: :get, class: "card card-neon mb-4" do |form| %>
+  <div class="card-body row g-3 align-items-end">
+    <div class="col-lg-3"><%= form.label :busca, "Número ou contato", class: "form-label" %><%= form.search_field :busca, value: params[:busca], class: "form-control" %></div>
+    <div class="col-lg-2"><%= form.label :situacao, "Situação", class: "form-label" %><%= form.select :situacao, [["Todas", ""]] + Pedido.situacoes.keys.map { |s| [s.humanize, s] }, { selected: params[:situacao] }, class: "form-select" %></div>
+    <div class="col-lg-2"><%= form.label :responsavel_id, "Responsável", class: "form-label" %><%= form.collection_select :responsavel_id, UsuarioAdministrativo.ativos.order(:nome), :id, :nome, { include_blank: "Todos", selected: params[:responsavel_id] }, class: "form-select" %></div>
+    <div class="col-lg-2"><%= form.label :inicio, "De", class: "form-label" %><%= form.date_field :inicio, value: params[:inicio], class: "form-control" %></div>
+    <div class="col-lg-2"><%= form.label :fim, "Até", class: "form-label" %><%= form.date_field :fim, value: params[:fim], class: "form-control" %></div>
+    <div class="col-lg-1"><%= form.submit "Filtrar", class: "btn btn-outline-light w-100" %></div>
+  </div>
+<% end %>
+<div class="card card-neon"><div class="tabela-responsiva"><table class="table card-table">
+  <thead><tr><th>Pedido</th><th>Cliente</th><th>Data</th><th>Total</th><th>Situação</th><th></th></tr></thead>
+  <tbody><% @pedidos.each do |pedido| %><tr class="<%= "table-warning" if pedido.atrasado? %>"><td><strong><%= pedido.numero %></strong><% if pedido.atrasado? %><br><small>Atendimento atrasado</small><% end %></td><td><%= pedido.nome_cliente %></td><td><%= l pedido.created_at, format: :short %></td><td><%= moeda_centavos(pedido.total_centavos) %></td><td><%= badge_situacao(pedido.situacao) %></td><td><%= link_to "Abrir", administracao_pedido_path(pedido), class: "btn btn-sm btn-outline-light" %></td></tr><% end %></tbody>
+</table></div></div>

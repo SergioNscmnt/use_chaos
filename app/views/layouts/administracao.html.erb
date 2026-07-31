@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <title><%= content_for(:title) || "Administração · #{t("app.nome")}" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+    <div class="admin-shell">
+      <aside class="admin-sidebar p-3" aria-label="Navegação administrativa">
+        <a class="marca-neon d-block mb-4" href="/administracao">Óculos Neon</a>
+        <nav class="nav nav-pills flex-column gap-1">
+          <a class="nav-link" href="/administracao">Painel</a>
+          <a class="nav-link" href="/administracao/produtos">Produtos</a>
+          <a class="nav-link" href="/administracao/pedidos">Pedidos</a>
+          <a class="nav-link" href="/administracao/avaliacoes">Avaliações</a>
+          <a class="nav-link" href="/administracao/manifestacoes">Manifestações</a>
+          <a class="nav-link" href="/administracao/relatorios">Relatórios</a>
+        </nav>
+      </aside>
+      <div class="min-w-0">
+        <header class="navbar navbar-neon px-3">
+          <span class="texto-suave">Área administrativa</span>
+          <% if respond_to?(:usuario_administrativo_signed_in?) && usuario_administrativo_signed_in? %>
+            <div class="d-flex align-items-center gap-3">
+              <span><%= current_usuario_administrativo.nome %></span>
+              <%= button_to "Sair", destroy_usuario_administrativo_session_path,
+                    method: :delete, class: "btn btn-sm btn-outline-light" %>
+            </div>
+          <% end %>
+        </header>
+        <%= render "shared/flash" %>
+        <main id="conteudo-principal" class="container-fluid p-3 p-md-4" tabindex="-1">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

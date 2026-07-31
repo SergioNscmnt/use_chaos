@@ -1,0 +1,13 @@
+<details class="card card-neon mt-4">
+  <summary class="card-header cursor-pointer">Avaliar este produto</summary>
+  <div class="card-body">
+    <%= form_with model: [produto, avaliacao] do |form| %>
+      <div class="row g-3">
+        <div class="col-md-6"><%= form.label :nome_autor, "Seu nome (opcional)", class: "form-label" %><%= form.text_field :nome_autor, maxlength: 120, class: "form-control" %></div>
+        <div class="col-md-6"><%= form.label :nota, "Nota", class: "form-label" %><%= form.select :nota, (1..5).map { |nota| ["#{nota} de 5", nota] }, {}, class: "form-select", required: true %></div>
+        <div class="col-12"><%= form.label :comentario, "Comentário", class: "form-label" %><%= form.text_area :comentario, minlength: 10, maxlength: 1500, rows: 4, class: "form-control", required: true %></div>
+        <div class="col-12"><p class="texto-suave small">A avaliação será publicada somente após moderação.</p><%= form.submit "Enviar avaliação", class: "btn btn-neon" %></div>
+      </div>
+    <% end %>
+  </div>
+</details>

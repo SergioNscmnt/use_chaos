@@ -1,0 +1,25 @@
+<% content_for :title, "Catálogo de óculos" %>
+<h1>Catálogo</h1>
+<p class="texto-suave">Encontre o modelo certo para seu ritmo.</p>
+
+<%= form_with url: produtos_path, method: :get, data: { turbo_frame: "catalogo" }, class: "card card-neon mb-4" do |form| %>
+  <div class="card-body row g-3">
+    <div class="col-lg-4"><%= form.label :busca, "Buscar", class: "form-label" %><%= form.search_field :busca, value: params[:busca], class: "form-control", placeholder: "Nome, descrição ou SKU" %></div>
+    <div class="col-md-6 col-lg-3"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, @categorias, :id, :nome, { include_blank: "Todas", selected: params[:categoria_id] }, class: "form-select" %></div>
+    <div class="col-6 col-md-3 col-lg-2"><%= form.label :preco_min, "Preço mín.", class: "form-label" %><%= form.number_field :preco_min, value: params[:preco_min], min: 0, step: 0.01, class: "form-control" %></div>
+    <div class="col-6 col-md-3 col-lg-2"><%= form.label :preco_max, "Preço máx.", class: "form-label" %><%= form.number_field :preco_max, value: params[:preco_max], min: 0, step: 0.01, class: "form-control" %></div>
+    <div class="col-md-6 col-lg-3"><%= form.label :disponibilidade, class: "form-label" %><%= form.select :disponibilidade, [["Todos", ""], ["Disponíveis", "disponivel"], ["Sem estoque", "sem_estoque"]], { selected: params[:disponibilidade] }, class: "form-select" %></div>
+    <div class="col-md-6 col-lg-3"><%= form.label :ordenacao, "Ordenar", class: "form-label" %><%= form.select :ordenacao, [["Mais recentes", "recentes"], ["Menor preço", "menor_preco"], ["Maior preço", "maior_preco"], ["Nome", "nome"]], { selected: params[:ordenacao] }, class: "form-select" %></div>
+    <div class="col-md-6 col-lg-3 d-flex align-items-end"><%= form.submit "Aplicar filtros", class: "btn btn-neon w-100" %></div>
+    <div class="col-md-6 col-lg-3 d-flex align-items-end"><%= link_to "Limpar filtros", produtos_path, class: "btn btn-outline-light w-100" %></div>
+  </div>
+<% end %>
+
+<%= turbo_frame_tag "catalogo", target: "_top" do %>
+  <% if @produtos.any? %>
+    <div class="row row-cards"><% @produtos.each do |produto| %><div class="col-sm-6 col-xl-4"><%= render "card", produto: %></div><% end %></div>
+    <nav class="mt-4" aria-label="Paginação do catálogo"><%== @pagy.series_nav(:bootstrap, aria_label: "Páginas do catálogo") %></nav>
+  <% else %>
+    <%= render "shared/estado_vazio", titulo: "Nenhum produto encontrado", mensagem: "Altere os filtros para explorar outros modelos.", acao_texto: "Limpar filtros", acao_url: produtos_path %>
+  <% end %>
+<% end %>

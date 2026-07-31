@@ -1,0 +1,29 @@
+<% content_for :title, "Categorias" %>
+
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+  <div><h1 class="mb-1">Categorias</h1><p class="texto-suave mb-0">Organize as famílias do catálogo.</p></div>
+  <%= link_to "Nova categoria", new_administracao_categoria_path, class: "btn btn-neon" %>
+</div>
+
+<div class="card card-neon">
+  <div class="tabela-responsiva">
+    <table class="table table-vcenter card-table">
+      <thead><tr><th>Nome</th><th>Slug</th><th>Situação</th><th class="text-end">Ações</th></tr></thead>
+      <tbody>
+        <% @categorias.each do |categoria| %>
+          <tr>
+            <td><%= categoria.nome %></td>
+            <td><code><%= categoria.slug %></code></td>
+            <td><span class="badge <%= categoria.ativa? ? "bg-green-lt" : "bg-secondary-lt" %>"><%= categoria.ativa? ? "Ativa" : "Inativa" %></span></td>
+            <td class="text-end">
+              <%= link_to "Editar", edit_administracao_categoria_path(categoria), class: "btn btn-sm btn-outline-light" %>
+              <% if categoria.ativa? %>
+                <%= button_to "Inativar", administracao_categoria_path(categoria), method: :delete, class: "btn btn-sm btn-outline-danger d-inline-block", form: { class: "d-inline-block", data: { turbo_confirm: "Inativar esta categoria?" } } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

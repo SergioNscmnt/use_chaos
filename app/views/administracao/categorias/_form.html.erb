@@ -1,0 +1,13 @@
+<%= render "shared/erros_formulario", objeto: categoria %>
+<%= form_with model: [:administracao, categoria], class: "card card-neon" do |form| %>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-8"><%= form.label :nome, class: "form-label" %><%= form.text_field :nome, class: "form-control", required: true %></div>
+      <div class="col-md-4"><%= form.label :posicao, "Posição", class: "form-label" %><%= form.number_field :posicao, min: 0, class: "form-control" %></div>
+      <div class="col-12"><%= form.label :slug, class: "form-label" %><%= form.text_field :slug, class: "form-control", placeholder: "gerado automaticamente" %></div>
+      <div class="col-12"><%= form.label :descricao, "Descrição", class: "form-label" %><%= form.text_area :descricao, rows: 4, class: "form-control" %></div>
+      <div class="col-12"><label class="form-check"><%= form.check_box :ativa, class: "form-check-input" %><span class="form-check-label">Categoria ativa</span></label></div>
+    </div>
+  </div>
+  <div class="card-footer d-flex gap-2"><%= form.submit "Salvar", class: "btn btn-neon" %><%= link_to "Cancelar", administracao_categorias_path, class: "btn btn-link" %></div>
+<% end %>

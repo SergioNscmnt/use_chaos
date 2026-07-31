@@ -1,0 +1,8 @@
+<h1><%= @usuario.nome %></h1>
+<div class="card card-neon"><div class="card-body">
+  <dl class="row mb-0">
+    <dt class="col-sm-3">E-mail</dt><dd class="col-sm-9"><%= @usuario.email %></dd>
+    <dt class="col-sm-3">Perfil</dt><dd class="col-sm-9"><%= @usuario.perfil.nome.humanize %></dd>
+    <dt class="col-sm-3">Situação</dt><dd class="col-sm-9"><%= @usuario.ativo? ? "Ativo" : "Inativo" %></dd>
+  </dl>
+</div></div>

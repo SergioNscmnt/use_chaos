@@ -1,0 +1,41 @@
+<% content_for :title, "Óculos Neon · Enxergue o futuro" %>
+
+<section class="card card-neon overflow-hidden mb-5">
+  <div class="card-body p-4 p-md-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <span class="badge bg-purple-lt mb-3">Coleção 2026</span>
+        <h1 class="display-2 fw-bold">Enxergue o futuro.<br><span class="text-orange">Corra com atitude.</span></h1>
+        <p class="lead texto-suave">Óculos de sol, esportivos e casuais com curadoria neon e atendimento humano pelo WhatsApp.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <%= link_to "Explorar catálogo", produtos_path, class: "btn btn-neon btn-lg" %>
+          <%= link_to "Enviar uma sugestão", new_manifestacao_path, class: "btn btn-outline-light btn-lg" %>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center" aria-hidden="true">
+        <div class="display-1 marca-neon py-5">◉</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-5" aria-labelledby="titulo-categorias">
+  <div class="d-flex justify-content-between align-items-end mb-3"><div><span class="text-orange">Escolha seu estilo</span><h2 id="titulo-categorias">Categorias</h2></div></div>
+  <div class="row row-cards">
+    <% @categorias.each do |categoria| %>
+      <div class="col-md-4"><a class="card card-neon h-100 text-decoration-none" href="<%= produtos_path(categoria_id: categoria.id) %>"><div class="card-body"><h3><%= categoria.nome %></h3><p class="texto-suave mb-0"><%= categoria.descricao %></p></div></a></div>
+    <% end %>
+  </div>
+</section>
+
+<% if @destaques.any? %>
+  <section class="mb-5" aria-labelledby="titulo-destaques">
+    <div class="d-flex justify-content-between align-items-end mb-3"><h2 id="titulo-destaques">Destaques</h2><%= link_to "Ver todos", produtos_path %></div>
+    <div class="row row-cards"><% @destaques.each do |produto| %><div class="col-sm-6 col-xl-4"><%= render "publico/produtos/card", produto: %></div><% end %></div>
+  </section>
+<% end %>
+
+<section aria-labelledby="titulo-lancamentos">
+  <div class="d-flex justify-content-between align-items-end mb-3"><h2 id="titulo-lancamentos">Lançamentos</h2><%= link_to "Ver catálogo", produtos_path(ordenacao: "recentes") %></div>
+  <div class="row row-cards"><% @lancamentos.each do |produto| %><div class="col-sm-6 col-xl-4"><%= render "publico/produtos/card", produto: %></div><% end %></div>
+</section>

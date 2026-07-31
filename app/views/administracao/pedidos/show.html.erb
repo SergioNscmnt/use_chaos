@@ -1,0 +1,19 @@
+<div class="d-flex flex-wrap justify-content-between gap-3 mb-4"><div><h1><%= @pedido.numero %></h1><p class="texto-suave"><%= @pedido.nome_cliente %> · <%= @pedido.contato_cliente %></p></div><div><%= badge_situacao(@pedido.situacao) %></div></div>
+<div class="row row-cards">
+  <div class="col-lg-8"><div class="card card-neon"><div class="tabela-responsiva"><table class="table card-table">
+    <thead><tr><th>Item histórico</th><th>Qtd.</th><th>Preço</th><th>Subtotal</th></tr></thead>
+    <tbody><% @pedido.itens_pedido.each do |item| %><tr><td><%= item.produto_nome %><br><small class="texto-suave"><%= item.produto_sku %> · <%= item.categoria_nome %></small></td><td><%= item.quantidade %></td><td><%= moeda_centavos(item.preco_unitario_centavos) %></td><td><%= moeda_centavos(item.subtotal_centavos) %></td></tr><% end %></tbody>
+    <tfoot><tr><th colspan="3">Total</th><th><%= moeda_centavos(@pedido.total_centavos) %></th></tr></tfoot>
+  </table></div></div></div>
+  <div class="col-lg-4"><div class="card card-neon"><div class="card-body">
+    <h2 class="h4">Atualizar situação</h2>
+    <% if @transicoes.any? %>
+      <%= form_with url: alterar_situacao_administracao_pedido_path(@pedido), method: :patch do |form| %>
+        <%= form.label :nova_situacao, "Nova situação", class: "form-label" %><%= form.select :nova_situacao, @transicoes.map { |s| [s.humanize, s] }, {}, class: "form-select mb-3" %>
+        <%= form.label :observacao, "Observação", class: "form-label" %><%= form.text_area :observacao, rows: 3, class: "form-control mb-3" %>
+        <%= form.submit "Atualizar pedido", class: "btn btn-neon" %>
+      <% end %>
+    <% else %><p class="texto-suave">Não existem transições disponíveis.</p><% end %>
+  </div></div></div>
+</div>
+<section class="mt-5"><h2>Histórico</h2><ol class="list-group list-group-numbered"><% @pedido.historicos_pedido.each do |historico| %><li class="list-group-item bg-transparent text-white"><strong><%= historico.situacao_nova.humanize %></strong> · <%= l historico.created_at, format: :long %><% if historico.usuario_administrativo %> por <%= historico.usuario_administrativo.nome %><% end %><% if historico.observacao.present? %><br><span class="texto-suave"><%= historico.observacao %></span><% end %></li><% end %></ol></section>

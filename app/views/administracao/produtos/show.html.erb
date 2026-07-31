@@ -1,0 +1,29 @@
+<div class="d-flex flex-wrap justify-content-between gap-3 mb-4">
+  <div><h1><%= @produto.nome %></h1><p class="texto-suave"><%= @produto.sku %> · <%= @produto.categoria.nome %></p></div>
+  <div><%= link_to "Editar", edit_administracao_produto_path(@produto), class: "btn btn-neon" %></div>
+</div>
+
+<div class="row row-cards">
+  <div class="col-lg-8">
+    <div class="card card-neon"><div class="card-body">
+      <p><%= simple_format @produto.descricao %></p>
+      <dl class="row mb-0">
+        <dt class="col-sm-4">Preço</dt><dd class="col-sm-8"><%= moeda_centavos(@produto.preco_centavos) %></dd>
+        <dt class="col-sm-4">Custo</dt><dd class="col-sm-8"><%= moeda_centavos(@produto.custo_centavos) %></dd>
+        <dt class="col-sm-4">Estoque</dt><dd class="col-sm-8"><%= @produto.estoque %></dd>
+      </dl>
+    </div></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card card-neon"><div class="card-body">
+      <h2 class="h4">Ajustar estoque</h2>
+      <%= form_with url: ajustar_estoque_administracao_produto_path(@produto), method: :patch do |form| %>
+        <%= form.label :quantidade, "Nova quantidade", class: "form-label" %>
+        <%= form.number_field :quantidade, min: 0, value: @produto.estoque, class: "form-control mb-3", required: true %>
+        <%= form.label :motivo, class: "form-label" %>
+        <%= form.text_field :motivo, class: "form-control mb-3", required: true %>
+        <%= form.submit "Atualizar estoque", class: "btn btn-destaque w-100" %>
+      <% end %>
+    </div></div>
+  </div>
+</div>

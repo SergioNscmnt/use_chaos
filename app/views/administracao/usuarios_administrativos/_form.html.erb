@@ -1,0 +1,12 @@
+<%= render "shared/erros_formulario", objeto: usuario %>
+<%= form_with model: [:administracao, usuario], class: "card card-neon" do |form| %>
+  <div class="card-body row g-3">
+    <div class="col-md-6"><%= form.label :nome, class: "form-label" %><%= form.text_field :nome, class: "form-control", required: true %></div>
+    <div class="col-md-6"><%= form.label :email, "E-mail", class: "form-label" %><%= form.email_field :email, class: "form-control", required: true %></div>
+    <div class="col-md-6"><%= form.label :perfil_id, "Perfil", class: "form-label" %><%= form.collection_select :perfil_id, Perfil.order(:nome), :id, :nome, {}, class: "form-select", required: true %></div>
+    <div class="col-md-6 d-flex align-items-end"><label class="form-check mb-2"><%= form.check_box :ativo, class: "form-check-input" %><span class="form-check-label">Usuário ativo</span></label></div>
+    <div class="col-md-6"><%= form.label :password, "Senha", class: "form-label" %><%= form.password_field :password, autocomplete: "new-password", class: "form-control", required: usuario.new_record? %></div>
+    <div class="col-md-6"><%= form.label :password_confirmation, "Confirmar senha", class: "form-label" %><%= form.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", required: usuario.new_record? %></div>
+  </div>
+  <div class="card-footer d-flex gap-2"><%= form.submit "Salvar", class: "btn btn-neon" %><%= link_to "Cancelar", administracao_usuarios_administrativos_path, class: "btn btn-link" %></div>
+<% end %>

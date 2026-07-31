@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <title><%= content_for(:title) || t("app.nome") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for(:meta_description) || "Óculos de sol, corrida e casuais com atendimento pelo WhatsApp." %>">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="<%= t("app.nome") %>">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+    <header class="navbar navbar-expand-md navbar-neon sticky-top" aria-label="Navegação principal">
+      <div class="container-xl">
+        <a class="navbar-brand marca-neon" href="/">Óculos Neon</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-publico" aria-controls="menu-publico" aria-expanded="false" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <nav id="menu-publico" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto align-items-md-center">
+            <li class="nav-item"><a class="nav-link" href="/produtos">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link" href="/manifestacoes/new">Sugestões</a></li>
+            <li class="nav-item ms-md-3"><a class="btn btn-neon" href="/carrinho">Carrinho</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <%= render "shared/flash" %>
+
+    <main id="conteudo-principal" class="container-xl py-4 py-md-5" tabindex="-1">
+      <%= yield %>
+    </main>
+
+    <footer class="rodape-publico py-4 mt-5">
+      <div class="container-xl d-flex flex-column flex-md-row gap-2 justify-content-between">
+        <span>© <%= Time.zone.today.year %> Óculos Neon</span>
+        <span>Atendimento e conclusão da compra pelo WhatsApp</span>
+      </div>
+    </footer>
+  </body>
+</html>
