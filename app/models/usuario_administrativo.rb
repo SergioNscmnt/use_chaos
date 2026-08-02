@@ -7,6 +7,9 @@ class UsuarioAdministrativo < ApplicationRecord
 
   validates :nome, presence: true, length: { maximum: 120 }
   validates :ativo, inclusion: { in: [ true, false ] }
+  validates :whatsapp,
+    format: { with: /\A\d{10,15}\z/, message: "deve conter entre 10 e 15 dígitos" },
+    allow_blank: true
 
   scope :ativos, -> { where(ativo: true) }
 
@@ -20,5 +23,9 @@ class UsuarioAdministrativo < ApplicationRecord
 
   def inactive_message
     ativo? ? super : :inactive
+  end
+
+  def whatsapp=(valor)
+    super(valor.to_s.gsub(/\D/, "").presence)
   end
 end

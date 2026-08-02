@@ -1,5 +1,9 @@
 # Checklist de implantação e homologação
 
+As decisões e evidências técnicas desta versão estão registradas em
+[homologacao-final.md](homologacao-final.md). Os itens abaixo que dependem do
+ambiente ou de responsáveis humanos devem ser executados a cada publicação.
+
 ## Antes da publicação
 
 - [ ] Definir `URL_PUBLICA` com HTTPS e configurar DNS/certificado.
@@ -16,8 +20,8 @@
 
 ## Homologação funcional
 
-- [ ] Validar catálogo, filtros e produto em celular e desktop.
-- [ ] Validar navegação completa por teclado e com JavaScript desativado.
+- [x] Validar catálogo, filtros e produto em celular e desktop.
+- [x] Validar navegação completa por teclado e com JavaScript desativado.
 - [ ] Enviar pedido de teste e conferir número, itens, quantidades, total e
       caracteres acentuados na mensagem do WhatsApp.
 - [ ] Abrir o link `wa.me` em celular e WhatsApp Web com o número definitivo.

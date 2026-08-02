@@ -1,0 +1,61 @@
+<div id="carrinho-offcanvas-conteudo" class="offcanvas-body d-flex flex-column p-0">
+  <% if carrinho&.itens_carrinho&.any? %>
+    <div class="lista-carrinho-offcanvas flex-grow-1 overflow-y-auto p-3">
+      <% carrinho.itens_carrinho.each do |item| %>
+        <article class="item-carrinho-offcanvas py-3 <%= "item-carrinho-offcanvas--atencao" unless item.elegivel? %>">
+          <div class="d-flex justify-content-between gap-3">
+            <div>
+              <h3 class="h4 mb-1"><%= link_to item.produto.nome, produto_path(item.produto.slug), class: "text-white text-decoration-none" %></h3>
+              <p class="texto-suave small mb-0"><%= moeda_centavos(item.preco_unitario_centavos_observado) %> cada</p>
+            </div>
+            <strong><%= moeda_centavos(item.subtotal_centavos) %></strong>
+          </div>
+          <% unless item.elegivel? %>
+            <p class="text-warning small mt-2 mb-0">Preço, disponibilidade ou estoque mudou.</p>
+          <% end %>
+          <div class="d-flex align-items-end justify-content-between gap-3 mt-3">
+            <%= form_with url: item_carrinho_path(item), method: :patch, class: "d-flex align-items-end gap-2" do |form| %>
+              <div>
+                <%= form.label :quantidade, "Quantidade", for: "quantidade-offcanvas-#{item.id}", class: "form-label" %>
+                <%= form.number_field :quantidade,
+                      id: "quantidade-offcanvas-#{item.id}",
+                      value: item.quantidade,
+                      min: 1,
+                      max: item.produto.estoque,
+                      class: "form-control form-control-sm quantidade-offcanvas",
+                      aria: { label: "Quantidade de #{item.produto.nome}" } %>
+              </div>
+              <%= form.button conteudo_botao("Atualizar", :atualizar), type: :submit, class: "btn btn-sm btn-outline-light" %>
+            <% end %>
+            <%= button_to conteudo_botao("Remover", :remover), item_carrinho_path(item), method: :delete, class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: "Remover este item?" } } %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+    <div class="rodape-carrinho-offcanvas border-top p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="texto-suave">Total estimado</span>
+        <strong class="h2 mb-0"><%= moeda_centavos(carrinho.total_centavos) %></strong>
+      </div>
+      <div class="d-grid gap-2">
+        <% if carrinho.elegivel_para_checkout? %>
+          <%= link_to conteudo_botao("Finalizar Pedido", :whatsapp), new_checkout_path, class: "btn btn-destaque" %>
+        <% end %>
+        <%= link_to conteudo_botao("Ver carrinho completo", :visualizar), carrinho_path, class: "btn btn-outline-light" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="m-auto p-4 text-center">
+      <svg class="icone-carrinho mb-3" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M0 0h24v24H0z" stroke="none" />
+        <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+        <path d="M12.5 17h-6.5v-14h-2" />
+        <path d="M6 5l14 1l-1 7h-13" />
+        <path d="M16 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      </svg>
+      <h3>Seu carrinho está vazio</h3>
+      <p class="texto-suave">Adicione um modelo para vê-lo aqui.</p>
+      <%= link_to conteudo_botao("Explorar catálogo", :pesquisar), produtos_path, class: "btn btn-neon" %>
+    </div>
+  <% end %>
+</div>

@@ -9,7 +9,17 @@ class AcessibilidadeTest < ActiveSupport::TestCase
     assert_includes css, "@media (max-width: 767.98px)"
     assert_includes css, "@media (prefers-reduced-motion: reduce)"
     assert_includes css, ".skip-link:focus"
+    assert_includes css, ".form-label"
+    assert_includes css, ".form-control[size]"
+    assert_includes css, ".badge-neon"
     assert_includes layout, "csrf_meta_tags"
+  end
+
+  test "cards de formulário preservam o grid dentro do corpo" do
+    views = Dir[Rails.root.join("app/views/**/*.erb")].map { |arquivo| File.read(arquivo) }.join("\n")
+    card_body_com_row = /class="[^"]*(?:card-body[^"]*\brow\b|\brow\b[^"]*card-body)[^"]*"/
+
+    refute_match card_body_com_row, views
   end
 
   test "combinações essenciais superam contraste WCAG AA" do

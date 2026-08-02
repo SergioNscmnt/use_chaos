@@ -2,14 +2,16 @@
 
 <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
   <div><h1 class="mb-1">Produtos</h1><p class="texto-suave mb-0">Catálogo, preço, custo e disponibilidade.</p></div>
-  <%= link_to "Novo produto", new_administracao_produto_path, class: "btn btn-neon" %>
+  <%= link_to conteudo_botao("Novo produto", :adicionar), new_administracao_produto_path, class: "btn btn-neon" %>
 </div>
 
 <%= form_with url: administracao_produtos_path, method: :get, class: "card card-neon mb-4" do |form| %>
-  <div class="card-body row g-3 align-items-end">
-    <div class="col-md-5"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, @categorias, :id, :nome, { include_blank: "Todas" }, class: "form-select" %></div>
-    <div class="col-md-4"><%= form.label :ativo, "Situação", class: "form-label" %><%= form.select :ativo, [["Todos", ""], ["Ativos", "1"], ["Inativos", "0"]], { selected: params[:ativo] }, class: "form-select" %></div>
-    <div class="col-md-3"><%= form.submit "Filtrar", class: "btn btn-outline-light w-100" %></div>
+  <div class="card-body">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-5"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, @categorias, :id, :nome, { include_blank: "Todas" }, class: "form-select" %></div>
+      <div class="col-md-4"><%= form.label :ativo, "Situação", class: "form-label" %><%= form.select :ativo, [["Todos", ""], ["Ativos", "1"], ["Inativos", "0"]], { selected: params[:ativo] }, class: "form-select" %></div>
+      <div class="col-md-3"><%= form.button conteudo_botao("Filtrar", :filtrar), type: :submit, class: "btn btn-outline-light w-100" %></div>
+    </div>
   </div>
 <% end %>
 
@@ -22,8 +24,11 @@
         <td><%= produto.categoria.nome %></td>
         <td><%= moeda_centavos(produto.preco_centavos) %></td>
         <td><span class="<%= "text-warning" if produto.estoque_baixo? %>"><%= produto.estoque %></span></td>
-        <td><span class="badge <%= produto.compravel? ? "bg-green-lt" : "bg-secondary-lt" %>"><%= produto.compravel? ? "Comprável" : "Indisponível" %></span></td>
-        <td class="text-end"><%= link_to "Abrir", administracao_produto_path(produto), class: "btn btn-sm btn-outline-light" %></td>
+        <td><%= badge_neon(
+          produto.compravel? ? "Comprável" : "Indisponível",
+          tom: produto.compravel? ? :sucesso : :neutro
+        ) %></td>
+        <td class="text-end"><%= link_to conteudo_botao("Abrir", :visualizar), administracao_produto_path(produto), class: "btn btn-sm btn-outline-light" %></td>
       </tr>
     <% end %>
   </tbody>

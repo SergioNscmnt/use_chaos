@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_31_041300) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_02_060000) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -300,6 +300,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_31_041300) do
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "updated_at", null: false
+    t.string "whatsapp", limit: 15
     t.index ["ativo"], name: "index_usuarios_administrativos_on_ativo"
     t.index ["email"], name: "index_usuarios_administrativos_on_email", unique: true
     t.index ["perfil_id"], name: "index_usuarios_administrativos_on_perfil_id"

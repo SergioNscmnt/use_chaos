@@ -31,12 +31,15 @@ module Publico
     end
 
     def responder_sucesso(mensagem)
+      carrinho = carrinho_atual.reload
       respond_to do |format|
         format.html { redirect_to carrinho_path, notice: mensagem }
         format.turbo_stream do
           flash.now[:notice] = mensagem
           render turbo_stream: [
-            turbo_stream.replace("carrinho", partial: "publico/carrinhos/carrinho", locals: { carrinho: carrinho_atual }),
+            turbo_stream.replace("atalho-carrinho", partial: "publico/carrinhos/atalho_offcanvas", locals: { carrinho: }),
+            turbo_stream.replace("carrinho-offcanvas-conteudo", partial: "publico/carrinhos/conteudo_offcanvas", locals: { carrinho: }),
+            turbo_stream.replace("carrinho", partial: "publico/carrinhos/carrinho", locals: { carrinho: }),
             turbo_stream.replace("mensagens", partial: "shared/flash")
           ]
         end

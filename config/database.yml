@@ -20,6 +20,10 @@ default: &default
 
 development:
   <<: *default
+  port: <%= ENV.fetch("DATABASE_PORT", 3307) %>
+<% unless ENV["DATABASE_URL"] || ENV["DATABASE_HOST"] %>
+  socket: <%= ENV.fetch("DATABASE_SOCKET", File.expand_path("../tmp/mariadb-development/mysql.sock", __dir__)) %>
+<% end %>
   database: <%= ENV.fetch("DATABASE_NAME", "use_chaos_development") %>
 
 # Warning: The database defined as "test" will be erased and
@@ -27,6 +31,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  port: <%= ENV.fetch("DATABASE_PORT", 3307) %>
+<% unless ENV["DATABASE_URL"] || ENV["DATABASE_HOST"] %>
+  socket: <%= ENV.fetch("DATABASE_SOCKET", File.expand_path("../tmp/mariadb-development/mysql.sock", __dir__)) %>
+<% end %>
   database: <%= ENV.fetch("DATABASE_NAME_TEST", "use_chaos_test") %>
 
 # As with config/credentials.yml, you never want to store sensitive information,

@@ -8,7 +8,9 @@ class Produto < ApplicationRecord
   has_many :itens_carrinho, dependent: :restrict_with_error
   has_many :itens_pedido, dependent: :restrict_with_error
 
-  accepts_nested_attributes_for :imagens_produto, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :imagens_produto,
+    allow_destroy: true,
+    reject_if: :imagem_produto_em_branco?
 
   validates :nome, :slug, :sku, :descricao, presence: true
   validates :slug, :sku, uniqueness: { case_sensitive: false }
@@ -48,7 +50,35 @@ class Produto < ApplicationRecord
     avaliacoes.aprovadas.count
   end
 
+  def preco
+    return @preco_digitado if defined?(@preco_digitado)
+
+    Valores::Monetario.formatar(preco_centavos)
+  end
+
+  def preco=(valor)
+    @preco_digitado = valor
+    self.preco_centavos = Valores::Monetario.para_centavos(valor)
+  end
+
+  def custo
+    return @custo_digitado if defined?(@custo_digitado)
+
+    Valores::Monetario.formatar(custo_centavos)
+  end
+
+  def custo=(valor)
+    @custo_digitado = valor
+    self.custo_centavos = Valores::Monetario.para_centavos(valor)
+  end
+
   private
+
+  def imagem_produto_em_branco?(atributos)
+    atributos["id"].blank? &&
+      atributos["arquivo"].blank? &&
+      atributos["texto_alternativo"].blank?
+  end
 
   def normalizar_identificadores
     self.slug = nome.to_s.parameterize if slug.blank? && nome.present?

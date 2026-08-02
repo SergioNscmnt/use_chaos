@@ -13,6 +13,7 @@ class CarrinhoCheckoutTest < ActiveSupport::TestCase
 
     assert_equal 3, item.reload.quantidade
     assert_equal 38_970, @carrinho.reload.total_centavos
+    assert_equal 3, @carrinho.quantidade_itens
     assert @carrinho.elegivel_para_checkout?
 
     erro = assert_raises(ActiveRecord::RecordInvalid) do

@@ -1,0 +1,69 @@
+<% content_for :title, "Minha conta · Administração" %>
+
+<div class="mb-4">
+  <h1 class="mb-1">Minha conta</h1>
+  <p class="texto-suave mb-0">Atualize seus dados de contato e suas credenciais de acesso.</p>
+</div>
+
+<%= render "shared/erros_formulario", objeto: @usuario %>
+<%= form_with model: @usuario, url: administracao_minha_conta_path, method: :patch, class: "card card-neon" do |form| %>
+  <div class="card-body">
+    <div class="row g-4">
+      <div class="col-12">
+        <h2 class="h3 mb-3">Dados pessoais</h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <%= form.label :nome, "Nome", class: "form-label" %>
+            <%= form.text_field :nome, autocomplete: "name", maxlength: 120, class: "form-control", required: true %>
+          </div>
+          <div class="col-md-6">
+            <%= form.label :whatsapp, "WhatsApp", class: "form-label" %>
+            <%= form.telephone_field :whatsapp,
+                  autocomplete: "tel",
+                  inputmode: "tel",
+                  placeholder: "+55 (69) 99999-9999",
+                  class: "form-control",
+                  data: { controller: "mascara-telefone", action: "input->mascara-telefone#formatar" } %>
+            <small class="texto-suave">Informe o código do país, DDD e número.</small>
+          </div>
+          <div class="col-md-6">
+            <%= form.label :email, "E-mail de acesso", class: "form-label" %>
+            <%= form.email_field :email, autocomplete: "email", class: "form-control", required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12"><hr class="my-0"></div>
+
+      <div class="col-12">
+        <h2 class="h3 mb-1">Alterar senha</h2>
+        <p class="texto-suave mb-3">Deixe a nova senha vazia para manter a atual. A senha atual é obrigatória ao alterar o e-mail ou a senha.</p>
+        <div class="row g-3">
+          <div class="col-md-4" data-controller="visibilidade-senha">
+            <%= form.label :current_password, "Senha atual", class: "form-label" %>
+            <div class="input-group">
+              <%= form.password_field :current_password, autocomplete: "current-password", class: "form-control", data: { visibilidade_senha_target: "campo" } %>
+              <button type="button" class="btn btn-outline-light" aria-label="Exibir senha atual" aria-pressed="false" data-action="visibilidade-senha#alternar" data-visibilidade-senha-target="botao">
+                <%= icone_acao :visualizar, data: { visibilidade_senha_target: "iconeExibir" } %>
+                <%= icone_acao :ocultar, classes: "d-none", data: { visibilidade_senha_target: "iconeOcultar" } %>
+                <span class="visually-hidden" data-visibilidade-senha-target="rotulo">Exibir</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <%= form.label :password, "Nova senha", class: "form-label" %>
+            <%= form.password_field :password, autocomplete: "new-password", minlength: 6, class: "form-control" %>
+          </div>
+          <div class="col-md-4">
+            <%= form.label :password_confirmation, "Confirmar nova senha", class: "form-label" %>
+            <%= form.password_field :password_confirmation, autocomplete: "new-password", minlength: 6, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer d-flex flex-wrap gap-2">
+    <%= form.button conteudo_botao("Salvar alterações", :salvar), type: :submit, class: "btn btn-neon" %>
+    <%= link_to conteudo_botao("Cancelar", :cancelar), administracao_root_path, class: "btn btn-link" %>
+  </div>
+<% end %>

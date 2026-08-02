@@ -1,0 +1,65 @@
+<% imagem = imagem_form.object %>
+<% arquivo_persistido = imagem.arquivo.attached? && imagem.arquivo.blob.persisted? %>
+<div class="galeria-formulario__item border rounded p-3"
+     data-galeria-produto-item
+     data-persistida="<%= imagem.persisted? %>">
+  <%= imagem_form.hidden_field :_destroy, value: "0" %>
+  <div class="row g-3 align-items-start">
+    <div class="col-md-3">
+      <div class="ratio ratio-4x3 galeria-formulario__preview">
+        <% if arquivo_persistido %>
+          <%= image_tag imagem.arquivo,
+                alt: imagem.texto_alternativo,
+                class: "galeria-formulario__imagem",
+                data: { preview_imagem: true } %>
+        <% else %>
+          <img alt=""
+               class="galeria-formulario__imagem d-none"
+               data-preview-imagem
+               aria-hidden="true">
+          <span class="m-auto texto-suave small text-center px-2" data-preview-placeholder>
+            <%= imagem.arquivo.attached? ? "Selecione novamente a imagem após corrigir os erros" : "Pré-visualização" %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="row g-3">
+        <div class="col-12">
+          <%= imagem_form.label :arquivo, imagem.persisted? ? "Substituir imagem" : "Imagem", class: "form-label" %>
+          <%= imagem_form.file_field :arquivo,
+                accept: ImagemProduto::TIPOS_PERMITIDOS.join(","),
+                required: !arquivo_persistido,
+                class: "form-control",
+                data: { action: "change->galeria-produto#previsualizar" } %>
+          <small class="texto-suave">JPEG, PNG ou WebP de até 8 MB.</small>
+        </div>
+        <div class="col-md-8">
+          <%= imagem_form.label :texto_alternativo, "Texto alternativo", class: "form-label" %>
+          <%= imagem_form.text_field :texto_alternativo,
+                maxlength: 180,
+                class: "form-control",
+                required: true,
+                placeholder: "Descreva o que aparece na imagem" %>
+        </div>
+        <div class="col-md-4">
+          <%= imagem_form.label :posicao, "Ordem", class: "form-label" %>
+          <%= imagem_form.number_field :posicao, min: 0, value: imagem.posicao || 0, class: "form-control" %>
+        </div>
+        <div class="col-12 d-flex flex-wrap align-items-center justify-content-between gap-3">
+          <label class="form-check mb-0">
+            <%= imagem_form.check_box :principal,
+                  class: "form-check-input",
+                  data: { action: "change->galeria-produto#selecionarPrincipal" } %>
+            <span class="form-check-label">Imagem principal do catálogo</span>
+          </label>
+          <button type="button"
+                  class="btn btn-sm btn-outline-danger"
+                  data-action="galeria-produto#remover">
+            <%= conteudo_botao(imagem.persisted? ? "Remover imagem" : "Descartar", :remover) %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

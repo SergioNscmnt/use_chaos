@@ -52,11 +52,11 @@ module Administracao
     end
 
     def usuario_params
-      params.expect(usuario_administrativo: %i[nome email perfil_id ativo password password_confirmation])
+      params.expect(usuario_administrativo: %i[nome email whatsapp perfil_id ativo password password_confirmation])
     end
 
     def dados_auditaveis(usuario)
-      usuario.attributes.slice("nome", "email", "perfil_id", "ativo")
+      usuario.attributes.slice("nome", "email", "whatsapp", "perfil_id", "ativo")
     end
   end
 end

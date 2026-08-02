@@ -1,9 +1,20 @@
-<div id="mensagens" class="container-xl pt-3" aria-live="polite" aria-atomic="true">
+<div id="mensagens" class="toast-container toast-container-aplicacao">
   <% flash.each do |tipo, mensagem| %>
-    <% classe = tipo.to_s == "alert" ? "alert-danger" : "alert-success" %>
-    <div class="alert <%= classe %> alert-dismissible" role="status">
-      <%= mensagem %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    <% erro = %w[alert error].include?(tipo.to_s) %>
+    <% titulo = erro ? "Atenção" : "Tudo certo" %>
+    <div class="toast toast-aplicacao toast-aplicacao--<%= erro ? "erro" : "sucesso" %> show"
+         role="<%= erro ? "alert" : "status" %>"
+         aria-live="<%= erro ? "assertive" : "polite" %>"
+         aria-atomic="true"
+         data-controller="toast"
+         data-toast-autohide-value="<%= !erro %>"
+         data-toast-delay-value="5000">
+      <div class="toast-header">
+        <span class="toast-aplicacao__indicador" aria-hidden="true"></span>
+        <strong class="me-auto"><%= titulo %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Fechar mensagem"></button>
+      </div>
+      <div class="toast-body"><%= mensagem %></div>
     </div>
   <% end %>
 </div>

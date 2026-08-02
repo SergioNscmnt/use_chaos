@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DATA_DIR="${MARIADB_DEV_DATA_DIR:-$APP_DIR/tmp/mariadb-development}"
+SOCKET_FILE="${DATABASE_SOCKET:-$DATA_DIR/mysql.sock}"
+PID_FILE="$DATA_DIR/mariadbd.pid"
+LOG_FILE="$DATA_DIR/mariadbd.log"
+PORT="${DATABASE_PORT:-3307}"
+
+running() {
+  [ -f "$PID_FILE" ] && kill -0 "$(tr -dc '0-9' < "$PID_FILE")" 2>/dev/null
+}
+
+initialize() {
+  command -v mariadbd >/dev/null || {
+    echo "MariaDB não encontrado. Instale o servidor MariaDB ou configure DATABASE_URL."
+    exit 1
+  }
+  command -v mariadb-install-db >/dev/null || {
+    echo "mariadb-install-db não encontrado."
+    exit 1
+  }
+
+  mkdir -p "$DATA_DIR"
+  if [ ! -d "$DATA_DIR/mysql" ]; then
+    echo "Inicializando MariaDB local em $DATA_DIR..."
+    mariadb-install-db \
+      --no-defaults \
+      --datadir="$DATA_DIR" \
+      --auth-root-authentication-method=normal \
+      --skip-test-db
+  fi
+}
+
+start() {
+  initialize
+  if running; then
+    echo "MariaDB local já está ativo."
+    return
+  fi
+
+  rm -f "$PID_FILE" "$SOCKET_FILE"
+  echo "Iniciando MariaDB local na porta $PORT..."
+  nohup mariadbd \
+    --no-defaults \
+    --datadir="$DATA_DIR" \
+    --socket="$SOCKET_FILE" \
+    --pid-file="$PID_FILE" \
+    --port="$PORT" \
+    --bind-address=127.0.0.1 \
+    --skip-name-resolve \
+    --innodb-use-native-aio=0 \
+    >"$LOG_FILE" 2>&1 &
+
+  for _attempt in {1..50}; do
+    if mariadb-admin --no-defaults --socket="$SOCKET_FILE" --user=root ping >/dev/null 2>&1; then
+      echo "MariaDB local pronto."
+      return
+    fi
+    sleep 0.1
+  done
+
+  echo "Não foi possível iniciar o MariaDB local. Últimas linhas do log:"
+  tail -n 30 "$LOG_FILE"
+  exit 1
+}
+
+stop() {
+  if running; then
+    mariadb-admin --no-defaults --socket="$SOCKET_FILE" --user=root shutdown
+    echo "MariaDB local encerrado."
+  else
+    echo "MariaDB local não está ativo."
+  fi
+}
+
+status() {
+  if running; then
+    echo "MariaDB local ativo (PID $(tr -dc '0-9' < "$PID_FILE"), porta $PORT)."
+  else
+    echo "MariaDB local inativo."
+    exit 1
+  fi
+}
+
+case "${1:-start}" in
+  start) start ;;
+  stop) stop ;;
+  restart)
+    stop
+    start
+    ;;
+  status) status ;;
+  *)
+    echo "Uso: bin/mariadb-dev {start|stop|restart|status}"
+    exit 1
+    ;;
+esac

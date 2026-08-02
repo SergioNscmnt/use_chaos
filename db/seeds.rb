@@ -12,7 +12,7 @@ perfis.each do |nome, permissoes|
 end
 
 administrador = UsuarioAdministrativo.find_or_initialize_by(
-  email: ENV.fetch("ADMIN_EMAIL", "admin@oculosneon.test")
+  email: ENV.fetch("ADMIN_EMAIL", "admin@usechaos.com")
 )
 administrador.assign_attributes(
   nome: ENV.fetch("ADMIN_NOME", "Administrador"),
@@ -20,7 +20,7 @@ administrador.assign_attributes(
   ativo: true
 )
 if administrador.new_record?
-  administrador.password = ENV.fetch("ADMIN_PASSWORD", "TroqueEstaSenha123!")
+  administrador.password = ENV.fetch("ADMIN_PASSWORD", "UseChaos123!")
   administrador.password_confirmation = administrador.password
 end
 administrador.save!

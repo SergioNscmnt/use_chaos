@@ -14,7 +14,7 @@
     <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
     <div class="admin-shell">
       <aside class="admin-sidebar p-3" aria-label="Navegação administrativa">
-        <a class="marca-neon d-block mb-4" href="/administracao">Óculos Neon</a>
+        <a class="marca-neon d-block mb-4" href="/administracao">USE CHAOS</a>
         <nav class="nav nav-pills flex-column gap-1">
           <a class="nav-link" href="/administracao">Painel</a>
           <a class="nav-link" href="/administracao/produtos">Produtos</a>
@@ -22,6 +22,7 @@
           <a class="nav-link" href="/administracao/avaliacoes">Avaliações</a>
           <a class="nav-link" href="/administracao/manifestacoes">Manifestações</a>
           <a class="nav-link" href="/administracao/relatorios">Relatórios</a>
+          <%= link_to "Minha conta", administracao_minha_conta_path, class: "nav-link" %>
         </nav>
       </aside>
       <div class="min-w-0">
@@ -29,8 +30,9 @@
           <span class="texto-suave">Área administrativa</span>
           <% if respond_to?(:usuario_administrativo_signed_in?) && usuario_administrativo_signed_in? %>
             <div class="d-flex align-items-center gap-3">
-              <span><%= current_usuario_administrativo.nome %></span>
-              <%= button_to "Sair", destroy_usuario_administrativo_session_path,
+              <%= link_to conteudo_botao(current_usuario_administrativo.nome, :editar),
+                    administracao_minha_conta_path, class: "btn btn-sm btn-link text-white" %>
+              <%= button_to conteudo_botao("Sair", :sair), destroy_usuario_administrativo_session_path,
                     method: :delete, class: "btn btn-sm btn-outline-light" %>
             </div>
           <% end %>

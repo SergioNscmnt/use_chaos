@@ -1,6 +1,6 @@
 "pt-BR":
   app:
-    nome: "Óculos Neon"
+    nome: "USE CHAOS"
   date:
     formats:
       default: "%d/%m/%Y"
@@ -30,6 +30,12 @@
       greater_than_or_equal_to: "deve ser maior ou igual a %{count}"
       less_than_or_equal_to: "deve ser menor ou igual a %{count}"
   activerecord:
+    attributes:
+      usuario_administrativo:
+        current_password: "Senha atual"
+        password: "Senha"
+        password_confirmation: "Confirmação da senha"
+        whatsapp: "WhatsApp"
     errors:
       messages:
         record_invalid: "Falha na validação: %{errors}"

@@ -43,9 +43,7 @@ module Publico
     end
 
     def reais_para_centavos(valor)
-      (BigDecimal(valor.to_s.tr(",", ".")) * 100).round
-    rescue ArgumentError
-      0
+      Valores::Monetario.para_centavos(valor) || 0
     end
   end
 end

@@ -2,6 +2,6 @@
   <h2 id="titulo-estado-vazio" class="h3"><%= local_assigns.fetch(:titulo, "Nada por aqui ainda") %></h2>
   <p class="texto-suave mb-0"><%= local_assigns.fetch(:mensagem, "Novos conteúdos aparecerão aqui.") %></p>
   <% if local_assigns[:acao_texto] && local_assigns[:acao_url] %>
-    <a class="btn btn-neon mt-3" href="<%= acao_url %>"><%= acao_texto %></a>
+    <a class="btn btn-neon mt-3" href="<%= acao_url %>"><%= conteudo_botao(acao_texto, local_assigns.fetch(:acao_icone, :visualizar)) %></a>
   <% end %>
 </section>

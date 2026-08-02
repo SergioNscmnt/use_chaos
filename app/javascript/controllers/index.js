@@ -6,3 +6,18 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import GaleriaProdutoController from "./galeria_produto_controller"
+application.register("galeria-produto", GaleriaProdutoController)
+
+import MascaraMonetariaController from "./mascara_monetaria_controller"
+application.register("mascara-monetaria", MascaraMonetariaController)
+
+import MascaraTelefoneController from "./mascara_telefone_controller"
+application.register("mascara-telefone", MascaraTelefoneController)
+
+import ToastController from "./toast_controller"
+application.register("toast", ToastController)
+
+import VisibilidadeSenhaController from "./visibilidade_senha_controller"
+application.register("visibilidade-senha", VisibilidadeSenhaController)

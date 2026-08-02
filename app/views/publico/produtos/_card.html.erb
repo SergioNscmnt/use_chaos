@@ -1,17 +1,33 @@
-<article class="card card-neon h-100">
-  <% imagem = produto.imagens_produto.find(&:principal?) || produto.imagens_produto.first %>
-  <% if imagem&.arquivo&.attached? %>
-    <%= image_tag imagem.arquivo, alt: imagem.texto_alternativo, class: "card-img-top", loading: "lazy", width: 640, height: 420 %>
-  <% else %>
-    <div class="ratio ratio-4x3 d-grid place-items-center bg-dark-subtle"><span class="m-auto texto-suave">Imagem em breve</span></div>
-  <% end %>
+<article id="produto-card-<%= produto.id %>" class="card card-neon card-produto h-100">
+  <% imagem = imagens_exibiveis(produto).first %>
+  <div class="ratio ratio-4x3 card-produto__midia bg-dark-subtle">
+    <% if imagem&.arquivo&.attached? %>
+      <%= image_tag imagem.arquivo, alt: imagem.texto_alternativo, class: "card-produto__imagem", loading: "lazy", width: 640, height: 480 %>
+    <% else %>
+      <span class="card-produto__placeholder texto-suave">Imagem em breve</span>
+    <% end %>
+  </div>
   <div class="card-body d-flex flex-column">
     <span class="text-uppercase small texto-suave"><%= produto.categoria.nome %></span>
-    <h3 class="h2 mt-2"><%= link_to produto.nome, produto_path(produto.slug), class: "stretched-link text-decoration-none text-white" %></h3>
+    <h3 class="h2 mt-2"><%= link_to produto.nome, produto_path(produto.slug), class: "text-decoration-none text-white" %></h3>
     <p class="texto-suave flex-grow-1"><%= truncate(produto.descricao, length: 110) %></p>
     <div class="d-flex justify-content-between align-items-center">
       <strong class="fs-2 text-orange"><%= moeda_centavos(produto.preco_centavos) %></strong>
-      <span class="badge <%= produto.compravel? ? "bg-green-lt" : "bg-secondary-lt" %>"><%= produto.compravel? ? "Disponível" : "Indisponível" %></span>
+      <%= badge_neon(
+        produto.compravel? ? "Disponível" : "Indisponível",
+        tom: produto.compravel? ? :sucesso : :neutro
+      ) %>
+    </div>
+    <div class="d-grid mt-3">
+      <% if produto.compravel? %>
+        <%= form_with url: itens_carrinho_path, class: "d-grid" do |form| %>
+          <%= form.hidden_field :produto_id, value: produto.id %>
+          <%= form.hidden_field :quantidade, value: 1 %>
+          <%= form.button conteudo_botao("Comprar", :carrinho), type: :submit, class: "btn btn-neon", aria: { label: "Comprar #{produto.nome}" } %>
+        <% end %>
+      <% else %>
+        <button type="button" class="btn btn-outline-secondary" aria-label="Comprar <%= produto.nome %> indisponível" disabled><%= conteudo_botao("Comprar", :inativar) %></button>
+      <% end %>
     </div>
   </div>
 </article>

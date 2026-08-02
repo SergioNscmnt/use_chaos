@@ -24,7 +24,11 @@ class ImagemProduto < ApplicationRecord
 
   def somente_uma_principal
     return unless principal? && produto
-    return unless produto.imagens_produto.where(principal: true).where.not(id:).exists?
+
+    outras_principais = produto.imagens_produto.any? do |imagem|
+      imagem != self && !imagem.marked_for_destruction? && imagem.principal?
+    end
+    return unless outras_principais
 
     errors.add(:principal, "já foi definida para outra imagem")
   end

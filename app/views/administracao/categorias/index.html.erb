@@ -2,7 +2,7 @@
 
 <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
   <div><h1 class="mb-1">Categorias</h1><p class="texto-suave mb-0">Organize as famílias do catálogo.</p></div>
-  <%= link_to "Nova categoria", new_administracao_categoria_path, class: "btn btn-neon" %>
+  <%= link_to conteudo_botao("Nova categoria", :adicionar), new_administracao_categoria_path, class: "btn btn-neon" %>
 </div>
 
 <div class="card card-neon">
@@ -14,11 +14,14 @@
           <tr>
             <td><%= categoria.nome %></td>
             <td><code><%= categoria.slug %></code></td>
-            <td><span class="badge <%= categoria.ativa? ? "bg-green-lt" : "bg-secondary-lt" %>"><%= categoria.ativa? ? "Ativa" : "Inativa" %></span></td>
+            <td><%= badge_neon(
+              categoria.ativa? ? "Ativa" : "Inativa",
+              tom: categoria.ativa? ? :sucesso : :neutro
+            ) %></td>
             <td class="text-end">
-              <%= link_to "Editar", edit_administracao_categoria_path(categoria), class: "btn btn-sm btn-outline-light" %>
+              <%= link_to conteudo_botao("Editar", :editar), edit_administracao_categoria_path(categoria), class: "btn btn-sm btn-outline-light" %>
               <% if categoria.ativa? %>
-                <%= button_to "Inativar", administracao_categoria_path(categoria), method: :delete, class: "btn btn-sm btn-outline-danger d-inline-block", form: { class: "d-inline-block", data: { turbo_confirm: "Inativar esta categoria?" } } %>
+                <%= button_to conteudo_botao("Inativar", :inativar), administracao_categoria_path(categoria), method: :delete, class: "btn btn-sm btn-outline-danger d-inline-block", form: { class: "d-inline-block", data: { turbo_confirm: "Inativar esta categoria?" } } %>
               <% end %>
             </td>
           </tr>

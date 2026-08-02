@@ -14,7 +14,10 @@
 - [x] 2.3 Criar layouts e componentes compartilhados para as áreas pública e administrativa
 - [x] 2.4 Implementar navegação responsiva, estados vazios, alertas, formulários e tabelas acessíveis
 - [x] 2.5 Adicionar suporte a `prefers-reduced-motion`, navegação por teclado e contraste verificável
-- [ ] 2.6 Testar os componentes principais em viewports móveis e desktop e com JavaScript desativado
+- [x] 2.6 Testar os componentes principais em viewports móveis e desktop e com JavaScript desativado
+- [x] 2.7 Aplicar máscaras progressivas de moeda brasileira e telefone em formulários e filtros, preservando normalização no servidor e o fluxo sem JavaScript
+- [x] 2.8 Adicionar ao menu público responsivo um acesso à autenticação ou ao painel administrativo conforme a sessão atual
+- [x] 2.9 Manter o rodapé público após o conteúdo e no fim da viewport em páginas curtas, sem sobreposição em desktop ou celular
 
 ## 3. Autenticação, autorização e auditoria
 
@@ -43,7 +46,7 @@
 - [x] 5.4 Construir página de produto com galeria, características, disponibilidade, avaliações aprovadas e ação de compra
 - [x] 5.5 Implementar produtos relacionados sem duplicar o produto atual nem exibir itens não publicados
 - [x] 5.6 Adicionar metadados indexáveis, respostas de não encontrado e estados para sem estoque, indisponível e inativo
-- [ ] 5.7 Cobrir catálogo, filtros, SEO básico, responsividade e fluxos sem JavaScript com testes de request e system
+- [x] 5.7 Cobrir catálogo, filtros, SEO básico, responsividade e fluxos sem JavaScript com testes de request e system
 
 ## 6. Carrinho de compras
 
@@ -128,6 +131,6 @@
 - [x] 14.1 Executar fluxo de ponta a ponta do catálogo ao WhatsApp e da confirmação administrativa à baixa de estoque
 - [x] 14.2 Validar que pedidos iniciados, cancelados, confirmados e concluídos produzem métricas e relatórios coerentes
 - [x] 14.3 Executar a suíte completa, análise estática, verificação de segurança e testes de concorrência críticos
-- [ ] 14.4 Realizar auditoria de acessibilidade por teclado, contraste, rótulos, redução de movimento e viewports suportadas
+- [x] 14.4 Realizar auditoria de acessibilidade por teclado, contraste, rótulos, redução de movimento e viewports suportadas
 - [x] 14.5 Verificar desempenho das páginas públicas e consultas gerenciais com volume representativo
-- [ ] 14.6 Preparar checklist de implantação, homologar o número do WhatsApp e registrar os valores finais das questões em aberto
+- [x] 14.6 Preparar checklist de implantação, homologar o número do WhatsApp e registrar os valores finais das questões em aberto

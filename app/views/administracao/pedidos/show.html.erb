@@ -11,7 +11,7 @@
       <%= form_with url: alterar_situacao_administracao_pedido_path(@pedido), method: :patch do |form| %>
         <%= form.label :nova_situacao, "Nova situação", class: "form-label" %><%= form.select :nova_situacao, @transicoes.map { |s| [s.humanize, s] }, {}, class: "form-select mb-3" %>
         <%= form.label :observacao, "Observação", class: "form-label" %><%= form.text_area :observacao, rows: 3, class: "form-control mb-3" %>
-        <%= form.submit "Atualizar pedido", class: "btn btn-neon" %>
+        <%= form.button conteudo_botao("Atualizar pedido", :atualizar), type: :submit, class: "btn btn-neon" %>
       <% end %>
     <% else %><p class="texto-suave">Não existem transições disponíveis.</p><% end %>
   </div></div></div>

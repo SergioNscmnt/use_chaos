@@ -5,13 +5,15 @@
     <p class="texto-suave">Conte o que podemos melhorar. O contato é opcional quando você não precisa de retorno.</p>
     <%= render "shared/erros_formulario", objeto: @manifestacao %>
     <%= form_with model: @manifestacao, class: "card card-neon" do |form| %>
-      <div class="card-body row g-3">
-        <div class="col-md-6"><%= form.label :tipo, class: "form-label" %><%= form.select :tipo, [["Sugestão", "sugestao"], ["Feedback", "feedback"]], {}, class: "form-select", required: true %></div>
-        <div class="col-md-6"><%= form.label :categoria, class: "form-label" %><%= form.select :categoria, ["Produto", "Atendimento", "Site", "Outro"], {}, class: "form-select", required: true %></div>
-        <div class="col-12"><%= form.label :mensagem, class: "form-label" %><%= form.text_area :mensagem, minlength: 10, maxlength: 3000, rows: 7, class: "form-control", required: true %></div>
-        <div class="col-12"><%= form.label :contato, "Contato (opcional)", class: "form-label" %><%= form.text_field :contato, maxlength: 180, class: "form-control", autocomplete: "email" %><small class="texto-suave">Usaremos o contato apenas para responder esta manifestação.</small></div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6"><%= form.label :tipo, class: "form-label" %><%= form.select :tipo, [["Sugestão", "sugestao"], ["Feedback", "feedback"]], {}, class: "form-select", required: true %></div>
+          <div class="col-md-6"><%= form.label :categoria, class: "form-label" %><%= form.select :categoria, ["Produto", "Atendimento", "Site", "Outro"], {}, class: "form-select", required: true %></div>
+          <div class="col-12"><%= form.label :mensagem, class: "form-label" %><%= form.text_area :mensagem, minlength: 10, maxlength: 3000, rows: 7, class: "form-control", required: true %></div>
+          <div class="col-12"><%= form.label :contato, "Telefone ou e-mail (opcional)", class: "form-label" %><%= form.text_field :contato, maxlength: 180, class: "form-control", autocomplete: "email", data: { controller: "mascara-telefone", action: "input->mascara-telefone#formatar" } %><small class="texto-suave">Usaremos o contato apenas para responder esta manifestação.</small></div>
+        </div>
       </div>
-      <div class="card-footer"><%= form.submit "Enviar manifestação", class: "btn btn-neon" %></div>
+      <div class="card-footer"><%= form.button conteudo_botao("Enviar manifestação", :enviar), type: :submit, class: "btn btn-neon" %></div>
     <% end %>
   </div>
 </div>

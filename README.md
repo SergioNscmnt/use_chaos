@@ -1,4 +1,4 @@
-# Óculos Neon
+# USE CHAOS
 
 E-commerce Rails para catálogo público de óculos e checkout assistido pelo
 WhatsApp.
@@ -13,6 +13,11 @@ WhatsApp.
 As conexões usam `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_USER`,
 `DATABASE_PASSWORD`, `DATABASE_NAME` e `DATABASE_NAME_TEST`. A integração usa
 `URL_PUBLICA` e `WHATSAPP_NUMERO`.
+
+No desenvolvimento local, `bin/setup` e `bin/dev` inicializam automaticamente
+uma instância isolada do MariaDB em `tmp/mariadb-development`, com socket local
+e porta `3307`. Para usar outro servidor, informe `DATABASE_URL` ou
+`DATABASE_HOST` e as demais variáveis de conexão.
 
 ## Padrões operacionais configuráveis
 
@@ -30,6 +35,8 @@ Space Grotesk, Tabler e ícones são empacotados localmente pelo Yarn.
 ```sh
 bin/setup
 bin/dev
+bin/mariadb-dev status
+bin/mariadb-dev stop
 bin/rails test
 bin/rubocop
 bin/brakeman --no-pager
@@ -38,5 +45,6 @@ bin/bundler-audit
 
 Antes de publicar, siga o
 [checklist de implantação e homologação](docs/checklist-implantacao.md), além
-dos procedimentos de [operação](docs/operacao.md) e
+do registro de [homologação final](docs/homologacao-final.md), dos procedimentos
+de [operação](docs/operacao.md) e
 [privacidade e retenção](docs/privacidade-e-retencao.md).

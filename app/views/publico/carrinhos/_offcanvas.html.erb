@@ -1,0 +1,10 @@
+<aside id="carrinho-offcanvas" class="offcanvas offcanvas-end carrinho-offcanvas" tabindex="-1" aria-labelledby="carrinho-offcanvas-titulo">
+  <div class="offcanvas-header border-bottom">
+    <div>
+      <h2 id="carrinho-offcanvas-titulo" class="offcanvas-title">Seu carrinho</h2>
+      <p class="texto-suave mb-0 small">Revise os itens antes de continuar.</p>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar carrinho"></button>
+  </div>
+  <%= render "publico/carrinhos/conteudo_offcanvas", carrinho: %>
+</aside>

@@ -22,6 +22,10 @@ class Carrinho < ApplicationRecord
     itens_carrinho.sum(&:subtotal_centavos)
   end
 
+  def quantidade_itens
+    itens_carrinho.sum(&:quantidade)
+  end
+
   def elegivel_para_checkout?
     itens_carrinho.any? && itens_carrinho.all?(&:elegivel?)
   end

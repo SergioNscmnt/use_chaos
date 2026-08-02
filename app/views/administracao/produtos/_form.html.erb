@@ -7,8 +7,8 @@
       <div class="col-md-6"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, Categoria.ordenadas, :id, :nome, {}, class: "form-select", required: true %></div>
       <div class="col-md-6"><%= form.label :slug, class: "form-label" %><%= form.text_field :slug, class: "form-control", placeholder: "gerado automaticamente" %></div>
       <div class="col-12"><%= form.label :descricao, "Descrição", class: "form-label" %><%= form.text_area :descricao, rows: 5, class: "form-control", required: true %></div>
-      <div class="col-md-4"><%= form.label :preco_centavos, "Preço (centavos)", class: "form-label" %><%= form.number_field :preco_centavos, min: 0, class: "form-control", required: true %></div>
-      <div class="col-md-4"><%= form.label :custo_centavos, "Custo (centavos)", class: "form-label" %><%= form.number_field :custo_centavos, min: 0, class: "form-control", required: true %></div>
+      <div class="col-md-4"><%= form.label :preco, "Preço", class: "form-label" %><%= form.text_field :preco, inputmode: "decimal", autocomplete: "off", placeholder: "R$ 0,00", class: "form-control", required: true, data: { controller: "mascara-monetaria", action: "input->mascara-monetaria#formatar" } %></div>
+      <div class="col-md-4"><%= form.label :custo, "Custo", class: "form-label" %><%= form.text_field :custo, inputmode: "decimal", autocomplete: "off", placeholder: "R$ 0,00", class: "form-control", required: true, data: { controller: "mascara-monetaria", action: "input->mascara-monetaria#formatar" } %></div>
       <div class="col-md-4"><%= form.label :limiar_estoque_baixo, "Limiar de estoque baixo", class: "form-label" %><%= form.number_field :limiar_estoque_baixo, min: 0, class: "form-control" %></div>
       <div class="col-12 d-flex flex-wrap gap-4">
         <% { ativo: "Ativo", publicado: "Publicado", disponivel: "Disponível", destaque: "Destaque" }.each do |campo, rotulo| %>
@@ -16,21 +16,30 @@
         <% end %>
       </div>
       <div class="col-12"><%= form.label :lancamento_em, "Data de lançamento", class: "form-label" %><%= form.datetime_local_field :lancamento_em, class: "form-control" %></div>
-      <div class="col-12">
-        <h2 class="h4">Galeria</h2>
-        <%= form.fields_for :imagens_produto do |imagem_form| %>
-          <div class="row g-2 border rounded p-3 mb-2">
-            <div class="col-md-5"><%= imagem_form.label :arquivo, "Imagem", class: "form-label" %><%= imagem_form.file_field :arquivo, accept: ImagemProduto::TIPOS_PERMITIDOS.join(","), class: "form-control" %></div>
-            <div class="col-md-5"><%= imagem_form.label :texto_alternativo, "Texto alternativo", class: "form-label" %><%= imagem_form.text_field :texto_alternativo, class: "form-control" %></div>
-            <div class="col-md-2"><%= imagem_form.label :posicao, "Ordem", class: "form-label" %><%= imagem_form.number_field :posicao, min: 0, class: "form-control" %></div>
-            <div class="col-12 d-flex gap-4">
-              <label class="form-check"><%= imagem_form.check_box :principal, class: "form-check-input" %><span class="form-check-label">Principal</span></label>
-              <% if imagem_form.object.persisted? %><label class="form-check"><%= imagem_form.check_box :_destroy, class: "form-check-input" %><span class="form-check-label">Remover</span></label><% end %>
-            </div>
+      <div class="col-12" data-controller="galeria-produto">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+          <div>
+            <h2 class="h4 mb-1">Galeria</h2>
+            <p class="texto-suave mb-0">Adicione uma ou mais imagens e escolha a principal do catálogo.</p>
           </div>
-        <% end %>
+          <button type="button"
+                  class="btn btn-outline-light"
+                  data-action="galeria-produto#adicionar">
+            <%= conteudo_botao("Adicionar imagem", :adicionar) %>
+          </button>
+        </div>
+        <div class="d-grid gap-3" data-galeria-produto-target="lista">
+          <%= form.fields_for :imagens_produto do |imagem_form| %>
+            <%= render "administracao/produtos/campo_imagem", imagem_form: %>
+          <% end %>
+        </div>
+        <template data-galeria-produto-target="modelo">
+          <%= form.fields_for :imagens_produto, ImagemProduto.new, child_index: "NOVA_IMAGEM" do |imagem_form| %>
+            <%= render "administracao/produtos/campo_imagem", imagem_form: %>
+          <% end %>
+        </template>
       </div>
     </div>
   </div>
-  <div class="card-footer d-flex gap-2"><%= form.submit "Salvar", class: "btn btn-neon" %><%= link_to "Cancelar", administracao_produtos_path, class: "btn btn-link" %></div>
+  <div class="card-footer d-flex gap-2"><%= form.button conteudo_botao("Salvar", :salvar), type: :submit, class: "btn btn-neon" %><%= link_to conteudo_botao("Cancelar", :cancelar), administracao_produtos_path, class: "btn btn-link" %></div>
 <% end %>

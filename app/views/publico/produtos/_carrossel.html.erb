@@ -1,0 +1,50 @@
+<% imagens = imagens_exibiveis(produto) %>
+<% if imagens.any? %>
+  <% identificador = "carrossel-produto-#{produto.id}" %>
+  <div id="<%= identificador %>"
+       class="carousel slide carrossel-produto card-neon overflow-hidden"
+       role="region"
+       aria-label="Galeria de <%= produto.nome %>"
+       data-bs-interval="false">
+    <% if imagens.many? %>
+      <div class="carousel-indicators">
+        <% imagens.each_index do |indice| %>
+          <button type="button"
+                  data-bs-target="#<%= identificador %>"
+                  data-bs-slide-to="<%= indice %>"
+                  class="<%= "active" if indice.zero? %>"
+                  aria-current="<%= "true" if indice.zero? %>"
+                  aria-label="Exibir imagem <%= indice + 1 %> de <%= imagens.size %>"></button>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="carousel-inner">
+      <% imagens.each_with_index do |imagem, indice| %>
+        <div class="carousel-item <%= "active" if indice.zero? %>">
+          <div class="ratio ratio-4x3 carrossel-produto__midia">
+            <%= image_tag imagem.arquivo,
+                  alt: imagem.texto_alternativo,
+                  class: "carrossel-produto__imagem",
+                  loading: indice.zero? ? "eager" : "lazy",
+                  width: 960,
+                  height: 720 %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if imagens.many? %>
+      <button class="carousel-control-prev" type="button" data-bs-target="#<%= identificador %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Imagem anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#<%= identificador %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próxima imagem</span>
+      </button>
+    <% end %>
+  </div>
+<% else %>
+  <div class="ratio ratio-4x3 card card-neon">
+    <span class="m-auto texto-suave">Imagem em breve</span>
+  </div>
+<% end %>

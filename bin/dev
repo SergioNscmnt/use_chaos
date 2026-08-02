@@ -8,4 +8,8 @@ fi
 # Default to port 3000 if not specified
 export PORT="${PORT:-3000}"
 
+if [ -z "${DATABASE_URL:-}" ] && [ -z "${DATABASE_HOST:-}" ]; then
+  bin/mariadb-dev start
+fi
+
 exec foreman start -f Procfile.dev --env /dev/null "$@"

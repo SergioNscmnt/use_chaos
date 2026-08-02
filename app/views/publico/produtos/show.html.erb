@@ -1,14 +1,10 @@
-<% content_for :title, "#{@produto.nome} · Óculos Neon" %>
+<% content_for :title, "#{@produto.nome} · USE CHAOS" %>
 <% content_for :meta_description, truncate(strip_tags(@produto.descricao), length: 155) %>
 <% content_for :head do %><link rel="canonical" href="<%= produto_url(@produto.slug) %>"><% end %>
 
-<div class="row g-4 g-lg-5">
+<div class="row mx-0 g-4 g-lg-5 produto-detalhe">
   <section class="col-lg-7" aria-label="Galeria do produto">
-    <% if @produto.imagens_produto.any? { |imagem| imagem.arquivo.attached? } %>
-      <div class="row g-3"><% @produto.imagens_produto.each do |imagem| %><% if imagem.arquivo.attached? %><div class="col-12"><%= image_tag imagem.arquivo, alt: imagem.texto_alternativo, class: "img-fluid rounded card-neon", width: 960, height: 640 %></div><% end %><% end %></div>
-    <% else %>
-      <div class="ratio ratio-4x3 card card-neon"><span class="m-auto texto-suave">Imagem em breve</span></div>
-    <% end %>
+    <%= render "publico/produtos/carrossel", produto: @produto %>
   </section>
   <section class="col-lg-5">
     <span class="text-orange"><%= @produto.categoria.nome %></span>
@@ -22,7 +18,7 @@
         <div class="card-body">
           <%= form.hidden_field :produto_id, value: @produto.id %>
           <%= form.label :quantidade, class: "form-label" %>
-          <div class="input-group"><%= form.number_field :quantidade, value: 1, min: 1, max: @produto.estoque, class: "form-control", required: true %><%= form.submit "Adicionar ao carrinho", class: "btn btn-neon" %></div>
+          <div class="input-group"><%= form.number_field :quantidade, value: 1, min: 1, max: @produto.estoque, class: "form-control", required: true %><%= form.button conteudo_botao("Adicionar ao carrinho", :carrinho), type: :submit, class: "btn btn-neon" %></div>
         </div>
       <% end %>
     <% elsif @produto.sem_estoque? %>

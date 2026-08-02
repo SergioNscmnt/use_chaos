@@ -18,6 +18,10 @@ FileUtils.chdir APP_ROOT do
   # Install JavaScript dependencies
   system("yarn install --check-files")
 
+  if ENV["DATABASE_URL"].to_s.empty? && ENV["DATABASE_HOST"].to_s.empty?
+    system! "bin/mariadb-dev", "start"
+  end
+
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
   #   FileUtils.cp "config/database.yml.sample", "config/database.yml"

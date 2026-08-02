@@ -13753,8 +13753,156 @@ var hello_controller_default = class extends Controller {
   }
 };
 
+// app/javascript/controllers/galeria_produto_controller.js
+var galeria_produto_controller_default = class extends Controller {
+  static targets = ["lista", "modelo"];
+  connect() {
+    this.element.dataset.galeriaProdutoPronta = "true";
+  }
+  adicionar() {
+    const indice = `${Date.now()}${Math.floor(Math.random() * 1e3).toString().padStart(3, "0")}`;
+    const html = this.modeloTarget.innerHTML.replaceAll("NOVA_IMAGEM", indice);
+    this.listaTarget.insertAdjacentHTML("beforeend", html);
+    this.listaTarget.lastElementChild.querySelector("input[type='file']")?.focus();
+  }
+  remover(event) {
+    const item = event.currentTarget.closest("[data-galeria-produto-item]");
+    const campoDestruicao = item.querySelector("input[name$='[_destroy]']");
+    if (item.dataset.persistida === "true") {
+      campoDestruicao.value = "1";
+      item.hidden = true;
+    } else {
+      item.remove();
+    }
+  }
+  selecionarPrincipal(event) {
+    if (!event.currentTarget.checked) return;
+    this.element.querySelectorAll("input[name$='[principal]']").forEach((campo) => {
+      if (campo !== event.currentTarget) campo.checked = false;
+    });
+  }
+  previsualizar(event) {
+    const arquivo = event.currentTarget.files[0];
+    if (!arquivo) return;
+    const item = event.currentTarget.closest("[data-galeria-produto-item]");
+    const imagem = item.querySelector("[data-preview-imagem]");
+    const placeholder = item.querySelector("[data-preview-placeholder]");
+    const url = URL.createObjectURL(arquivo);
+    imagem.src = url;
+    imagem.classList.remove("d-none");
+    imagem.removeAttribute("aria-hidden");
+    placeholder?.classList.add("d-none");
+    imagem.addEventListener("load", () => URL.revokeObjectURL(url), { once: true });
+  }
+};
+
+// app/javascript/controllers/mascara_monetaria_controller.js
+var mascara_monetaria_controller_default = class extends Controller {
+  connect() {
+    if (this.element.value.trim() !== "") this.formatar();
+  }
+  formatar() {
+    const digitos = this.element.value.replace(/\D/g, "");
+    if (digitos === "") {
+      this.element.value = "";
+      return;
+    }
+    const valor = digitos.padStart(3, "0");
+    const centavos = valor.slice(-2);
+    const reais = valor.slice(0, -2).replace(/^0+(?=\d)/, "");
+    const reaisFormatados = reais.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    this.element.value = `R$ ${reaisFormatados},${centavos}`;
+  }
+};
+
+// app/javascript/controllers/mascara_telefone_controller.js
+var mascara_telefone_controller_default = class extends Controller {
+  static values = { minimoDigitos: { type: Number, default: 1 } };
+  connect() {
+    this.formatar();
+  }
+  formatar() {
+    const valor = this.element.value;
+    if (/[a-z@]/i.test(valor)) return;
+    let digitos = valor.replace(/\D/g, "");
+    if (digitos.length < this.minimoDigitosValue) return;
+    let prefixo = "";
+    if (digitos.length > 11 && digitos.startsWith("55")) {
+      prefixo = "+55 ";
+      digitos = digitos.slice(2);
+    }
+    digitos = digitos.slice(0, 11);
+    if (digitos === "") {
+      this.element.value = "";
+      return;
+    }
+    const ddd = digitos.slice(0, 2);
+    const numero = digitos.slice(2);
+    let formatado = `(${ddd}`;
+    if (digitos.length >= 2) formatado += ")";
+    if (numero.length > 0) {
+      const tamanhoPrefixo = numero.length > 8 ? 5 : 4;
+      formatado += ` ${numero.slice(0, tamanhoPrefixo)}`;
+      if (numero.length > tamanhoPrefixo) formatado += `-${numero.slice(tamanhoPrefixo)}`;
+    }
+    this.element.value = `${prefixo}${formatado}`;
+  }
+};
+
+// app/javascript/controllers/toast_controller.js
+var toast_controller_default = class extends Controller {
+  static values = {
+    autohide: { type: Boolean, default: true },
+    delay: { type: Number, default: 5e3 }
+  };
+  connect() {
+    this.remover = this.remover.bind(this);
+    this.element.addEventListener("hidden.bs.toast", this.remover, { once: true });
+    this.toast = Toast.getOrCreateInstance(this.element, {
+      autohide: this.autohideValue,
+      delay: this.delayValue
+    });
+    this.toast.show();
+  }
+  disconnect() {
+    this.element.removeEventListener("hidden.bs.toast", this.remover);
+    this.toast?.dispose();
+  }
+  remover() {
+    this.element.remove();
+  }
+};
+
+// app/javascript/controllers/visibilidade_senha_controller.js
+var visibilidade_senha_controller_default = class extends Controller {
+  static targets = ["campo", "botao", "rotulo", "iconeExibir", "iconeOcultar"];
+  alternar() {
+    const deveExibir = this.campoTarget.type === "password";
+    this.campoTarget.type = deveExibir ? "text" : "password";
+    this.rotuloTarget.textContent = deveExibir ? "Ocultar" : "Exibir";
+    this.iconeExibirTarget.classList.toggle("d-none", deveExibir);
+    this.iconeOcultarTarget.classList.toggle("d-none", !deveExibir);
+    this.botaoTarget.setAttribute("aria-label", deveExibir ? "Ocultar senha" : "Exibir senha");
+    this.botaoTarget.setAttribute("aria-pressed", deveExibir.toString());
+    this.campoTarget.focus({ preventScroll: true });
+  }
+};
+
 // app/javascript/controllers/index.js
 application.register("hello", hello_controller_default);
+application.register("galeria-produto", galeria_produto_controller_default);
+application.register("mascara-monetaria", mascara_monetaria_controller_default);
+application.register("mascara-telefone", mascara_telefone_controller_default);
+application.register("toast", toast_controller_default);
+application.register("visibilidade-senha", visibilidade_senha_controller_default);
+
+// app/javascript/application.js
+document.addEventListener("click", (event) => {
+  const skipLink = event.target.closest(".skip-link");
+  if (!skipLink) return;
+  const target = document.querySelector(skipLink.hash);
+  if (target) requestAnimationFrame(() => target.focus());
+});
 /*! Bundled license information:
 
 @hotwired/turbo/dist/turbo.es2017-esm.js:

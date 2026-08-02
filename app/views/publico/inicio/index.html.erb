@@ -1,15 +1,15 @@
-<% content_for :title, "Óculos Neon · Enxergue o futuro" %>
+<% content_for :title, "USE CHAOS · Enxergue o futuro" %>
 
 <section class="card card-neon overflow-hidden mb-5">
   <div class="card-body p-4 p-md-5">
     <div class="row align-items-center g-4">
       <div class="col-lg-7">
-        <span class="badge bg-purple-lt mb-3">Coleção 2026</span>
+        <%= badge_neon "Coleção 2026", tom: :primario, classes: "mb-3" %>
         <h1 class="display-2 fw-bold">Enxergue o futuro.<br><span class="text-orange">Corra com atitude.</span></h1>
         <p class="lead texto-suave">Óculos de sol, esportivos e casuais com curadoria neon e atendimento humano pelo WhatsApp.</p>
         <div class="d-flex flex-wrap gap-3 mt-4">
-          <%= link_to "Explorar catálogo", produtos_path, class: "btn btn-neon btn-lg" %>
-          <%= link_to "Enviar uma sugestão", new_manifestacao_path, class: "btn btn-outline-light btn-lg" %>
+          <%= link_to conteudo_botao("Explorar catálogo", :pesquisar), produtos_path, class: "btn btn-neon btn-lg" %>
+          <%= link_to conteudo_botao("Enviar uma sugestão", :mensagem), new_manifestacao_path, class: "btn btn-outline-light btn-lg" %>
         </div>
       </div>
       <div class="col-lg-5 text-center" aria-hidden="true">

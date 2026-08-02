@@ -1,19 +1,21 @@
 <h1>Relatórios gerenciais</h1>
 <p class="texto-suave">PDF e CSV usam os mesmos filtros e fórmulas do painel.</p>
 <%= form_with url: administracao_relatorios_path, method: :post, scope: :filtros, class: "card card-neon mb-5" do |form| %>
-  <div class="card-body row g-3">
-    <div class="col-md-3"><%= form.label :inicio, "De", class: "form-label" %><%= form.date_field :inicio, value: @filtros.inicio, class: "form-control", required: true %></div>
-    <div class="col-md-3"><%= form.label :fim, "Até", class: "form-label" %><%= form.date_field :fim, value: @filtros.fim, class: "form-control", required: true %></div>
-    <div class="col-md-3"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, @categorias, :id, :nome, { include_blank: "Todas" }, class: "form-select" %></div>
-    <div class="col-md-3"><%= form.label :produto_id, "Produto", class: "form-label" %><%= form.collection_select :produto_id, @produtos, :id, :nome, { include_blank: "Todos" }, class: "form-select" %></div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-3"><%= form.label :inicio, "De", class: "form-label" %><%= form.date_field :inicio, value: @filtros.inicio, class: "form-control", required: true %></div>
+      <div class="col-md-3"><%= form.label :fim, "Até", class: "form-label" %><%= form.date_field :fim, value: @filtros.fim, class: "form-control", required: true %></div>
+      <div class="col-md-3"><%= form.label :categoria_id, "Categoria", class: "form-label" %><%= form.collection_select :categoria_id, @categorias, :id, :nome, { include_blank: "Todas" }, class: "form-select" %></div>
+      <div class="col-md-3"><%= form.label :produto_id, "Produto", class: "form-label" %><%= form.collection_select :produto_id, @produtos, :id, :nome, { include_blank: "Todos" }, class: "form-select" %></div>
+    </div>
   </div>
   <div class="card-footer d-flex gap-3">
-    <button class="btn btn-neon" name="formato" value="pdf">Gerar PDF</button>
-    <button class="btn btn-outline-light" name="formato" value="csv">Gerar CSV</button>
+    <button class="btn btn-neon" name="formato" value="pdf"><%= conteudo_botao("Gerar PDF", :arquivo) %></button>
+    <button class="btn btn-outline-light" name="formato" value="csv"><%= conteudo_botao("Gerar CSV", :arquivo) %></button>
   </div>
 <% end %>
 <h2>Gerações recentes</h2>
 <div class="card card-neon"><div class="tabela-responsiva"><table class="table card-table">
   <thead><tr><th>Data</th><th>Formato</th><th>Situação</th><th></th></tr></thead>
-  <tbody><% @geracoes.each do |geracao| %><tr><td><%= l geracao.created_at, format: :short %></td><td><%= geracao.formato.upcase %></td><td><%= geracao.situacao.humanize %></td><td class="text-end"><%= link_to(geracao.concluida? ? "Baixar" : "Acompanhar", administracao_relatorio_path(geracao), class: "btn btn-sm btn-outline-light") %></td></tr><% end %></tbody>
+  <tbody><% @geracoes.each do |geracao| %><tr><td><%= l geracao.created_at, format: :short %></td><td><%= geracao.formato.upcase %></td><td><%= geracao.situacao.humanize %></td><td class="text-end"><%= link_to conteudo_botao(geracao.concluida? ? "Baixar" : "Acompanhar", geracao.concluida? ? :download : :visualizar), administracao_relatorio_path(geracao), class: "btn btn-sm btn-outline-light" %></td></tr><% end %></tbody>
 </table></div></div>

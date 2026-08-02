@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   namespace :administracao do
     root "painel#index"
+    resource :minha_conta, only: %i[show update], controller: :minha_conta
     resources :categorias, except: :show
     resources :produtos do
       patch :ajustar_estoque, on: :member

@@ -3,6 +3,7 @@ class UsuarioAdministrativoPolicy < ApplicationPolicy
   def show? = administra?
   def create? = administra?
   def update? = administra?
+  def atualizar_propria_conta? = usuario.present? && registro == usuario
 
   private
 

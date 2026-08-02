@@ -14,6 +14,10 @@ class FluxoEcommerceTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_includes response.body, produto.nome
     assert_includes response.body, "R$ 399,80"
+    assert_select "#mensagens .toast.toast-aplicacao--sucesso[role='status'][data-toast-autohide-value='true']" do
+      assert_select ".toast-body", "Produto adicionado ao carrinho."
+      assert_select "button[data-bs-dismiss='toast'][aria-label='Fechar mensagem']"
+    end
 
     get new_checkout_path
     assert_response :success
@@ -52,6 +56,12 @@ class FluxoEcommerceTest < ActionDispatch::IntegrationTest
       headers: { "ACCEPT" => "text/vnd.turbo-stream.html" }
     assert_response :success
     assert_equal "text/vnd.turbo-stream.html", response.media_type
+    assert_select "turbo-stream[action='replace'][target='atalho-carrinho']" do
+      assert_select "span#contador-carrinho", "1"
+    end
+    assert_select "turbo-stream[action='replace'][target='carrinho-offcanvas-conteudo']" do
+      assert_select ".item-carrinho-offcanvas", text: /#{Regexp.escape(produto.nome)}/
+    end
     assert_select "turbo-stream[action='replace'][target='carrinho']"
 
     get carrinho_path
@@ -69,5 +79,19 @@ class FluxoEcommerceTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", "Seu carrinho"
+  end
+
+  test "busca administrativa encontra telefone independentemente da pontuação" do
+    produto = criar_produto
+    pedido = criar_pedido(produto:)
+    pedido.update!(contato_cliente: "+55 (69) 99999-0101")
+    usuario = criar_usuario(permissoes: %w[gerenciar_pedidos])
+    sign_in usuario
+
+    get administracao_pedidos_path, params: { busca: "69999990101" }
+
+    assert_response :success
+    assert_select "strong", text: pedido.numero
+    assert_select "input[name='busca'][data-controller='mascara-telefone']"
   end
 end

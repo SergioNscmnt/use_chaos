@@ -1,7 +1,17 @@
 <div class="d-flex flex-wrap justify-content-between gap-3 mb-4">
   <div><h1><%= @produto.nome %></h1><p class="texto-suave"><%= @produto.sku %> · <%= @produto.categoria.nome %></p></div>
-  <div><%= link_to "Editar", edit_administracao_produto_path(@produto), class: "btn btn-neon" %></div>
+  <div><%= link_to conteudo_botao("Editar", :editar), edit_administracao_produto_path(@produto), class: "btn btn-neon" %></div>
 </div>
+
+<section class="mt-4" aria-labelledby="titulo-galeria-produto">
+  <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+    <h2 id="titulo-galeria-produto" class="h3 mb-0">Pré-visualização da galeria</h2>
+    <span class="texto-suave"><%= pluralize(imagens_exibiveis(@produto).size, "imagem", plural: "imagens") %></span>
+  </div>
+  <div class="col-xl-8">
+    <%= render "publico/produtos/carrossel", produto: @produto %>
+  </div>
+</section>
 
 <div class="row row-cards">
   <div class="col-lg-8">
@@ -22,7 +32,7 @@
         <%= form.number_field :quantidade, min: 0, value: @produto.estoque, class: "form-control mb-3", required: true %>
         <%= form.label :motivo, class: "form-label" %>
         <%= form.text_field :motivo, class: "form-control mb-3", required: true %>
-        <%= form.submit "Atualizar estoque", class: "btn btn-destaque w-100" %>
+        <%= form.button conteudo_botao("Atualizar estoque", :atualizar), type: :submit, class: "btn btn-destaque w-100" %>
       <% end %>
     </div></div>
   </div>

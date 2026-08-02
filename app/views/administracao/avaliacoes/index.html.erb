@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-items-center mb-4"><div><h1>Avaliações</h1><p class="texto-suave mb-0">Modere notas e comentários antes da publicação.</p></div></div>
-<%= form_with url: administracao_avaliacoes_path, method: :get, class: "mb-4" do |form| %><div class="input-group"><%= form.select :situacao, [["Todas", ""], ["Pendentes", "pendente"], ["Aprovadas", "aprovada"], ["Rejeitadas", "rejeitada"], ["Ocultas", "oculta"]], { selected: params[:situacao] }, class: "form-select" %><%= form.submit "Filtrar", class: "btn btn-outline-light" %></div><% end %>
+<%= form_with url: administracao_avaliacoes_path, method: :get, class: "mb-4" do |form| %><div class="input-group"><%= form.select :situacao, [["Todas", ""], ["Pendentes", "pendente"], ["Aprovadas", "aprovada"], ["Rejeitadas", "rejeitada"], ["Ocultas", "oculta"]], { selected: params[:situacao] }, class: "form-select" %><%= form.button conteudo_botao("Filtrar", :filtrar), type: :submit, class: "btn btn-outline-light" %></div><% end %>
 <div class="row row-cards">
   <% @avaliacoes.each do |avaliacao| %>
     <div class="col-lg-6"><article class="card card-neon h-100"><div class="card-body">
@@ -7,9 +7,9 @@
       <p class="mt-3"><%= avaliacao.comentario %></p>
       <small class="texto-suave"><%= avaliacao.nome_autor.presence || "Visitante anônimo" %></small>
     </div><div class="card-footer d-flex gap-2">
-      <%= button_to "Aprovar", administracao_avaliacao_path(avaliacao), method: :patch, params: { avaliacao: { situacao: "aprovada" } }, class: "btn btn-sm btn-success" %>
-      <%= button_to "Rejeitar", administracao_avaliacao_path(avaliacao), method: :patch, params: { avaliacao: { situacao: "rejeitada" } }, class: "btn btn-sm btn-danger" %>
-      <%= button_to "Ocultar", administracao_avaliacao_path(avaliacao), method: :patch, params: { avaliacao: { situacao: "oculta" } }, class: "btn btn-sm btn-outline-light" %>
+      <%= button_to conteudo_botao("Aprovar", :aprovar), administracao_avaliacao_path(avaliacao), method: :patch, params: { avaliacao: { situacao: "aprovada" } }, class: "btn btn-sm btn-success" %>
+      <%= button_to conteudo_botao("Rejeitar", :rejeitar), administracao_avaliacao_path(avaliacao), method: :patch, params: { avaliacao: { situacao: "rejeitada" } }, class: "btn btn-sm btn-danger" %>
+      <%= button_to conteudo_botao("Ocultar", :ocultar), administracao_avaliacao_path(avaliacao), method: :patch, params: { avaliacao: { situacao: "oculta" } }, class: "btn btn-sm btn-outline-light" %>
     </div></article></div>
   <% end %>
 </div>

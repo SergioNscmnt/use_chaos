@@ -1,8 +1,8 @@
 Arguments: 
-  /home/sergio/.nvm/versions/node/v22.22.1/bin/node /mnt/c/Users/sergi/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js add @hotwired/stimulus
+  /home/sergio/.nvm/versions/node/v22.22.1/bin/node /mnt/c/Users/sergi/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js add --dev axe-core@4.10.3
 
 PATH: 
-  /home/sergio/.rbenv/versions/4.0.1/lib/ruby/gems/4.0.0/bin:/home/sergio/.rbenv/versions/4.0.1/bin:/home/sergio/.rbenv/libexec:/home/sergio/.rbenv/plugins/ruby-build/bin:/home/sergio/.rbenv/shims:/home/sergio/.rbenv/bin:/home/sergio/.codex/tmp/arg0/codex-arg00F7URx:/home/sergio/.vscode-server/bin/41dd792b5e652393e7787322889ed5fdc58bd75b/bin/remote-cli:/home/sergio/.nvm/versions/node/v22.22.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Ruby33-x64/bin:/mnt/d/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Python27/:/mnt/c/Python27/Scripts:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/d/Program Files/Microsoft VS Code/bin:/mnt/d/Program Files/dotnet/:/mnt/d/Program Files/Git/cmd:/mnt/d/Program Files/Git/bin:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Users/sergi/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/src/flutter/bin:/mnt/d/Program Files/Java/jdk-20/:/mnt/d/Program Files/nodejs/:/mnt/d/Program Files/Docker/Docker/resources/bin:/mnt/c/Users/sergi/AppData/Local/Programs/Python/Python312/Scripts/:/mnt/c/Users/sergi/AppData/Local/Programs/Python/Python312/:/mnt/c/Users/sergi/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/sergi/.dotnet/tools:/mnt/c/Users/sergi/nodejs/modulo01:/mnt/d/Program Files/JetBrains/IntelliJ IDEA Community Edition 2022.2.3/bin:/mnt/c/Users/sergi/AppData/Roaming/npm:/mnt/j/Program Files/IntelliJ IDEA 2025.3.3/bin:/home/sergio/.vscode-server/extensions/openai.chatgpt-26.727.40816-linux-x64/bin/linux-x86_64
+  /home/sergio/.rbenv/shims:/home/sergio/.rbenv/bin:/home/sergio/.rbenv/bin:/home/sergio/.codex/tmp/arg0/codex-arg00F7URx:/home/sergio/.vscode-server/bin/41dd792b5e652393e7787322889ed5fdc58bd75b/bin/remote-cli:/home/sergio/.nvm/versions/node/v22.22.1/bin:/home/sergio/.rbenv/shims:/home/sergio/.rbenv/bin:/home/sergio/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Ruby33-x64/bin:/mnt/d/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Python27/:/mnt/c/Python27/Scripts:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/d/Program Files/Microsoft VS Code/bin:/mnt/d/Program Files/dotnet/:/mnt/d/Program Files/Git/cmd:/mnt/d/Program Files/Git/bin:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Users/sergi/AppData/Local/Android/Sdk/platform-tools:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/src/flutter/bin:/mnt/d/Program Files/Java/jdk-20/:/mnt/d/Program Files/nodejs/:/mnt/d/Program Files/Docker/Docker/resources/bin:/mnt/c/Users/sergi/AppData/Local/Programs/Python/Python312/Scripts/:/mnt/c/Users/sergi/AppData/Local/Programs/Python/Python312/:/mnt/c/Users/sergi/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/sergi/.dotnet/tools:/mnt/d/Program Files/Git/cmd:/mnt/c/Users/sergi/nodejs/modulo01:/mnt/d/Program Files/JetBrains/IntelliJ IDEA Community Edition 2022.2.3/bin:/mnt/c/Users/sergi/AppData/Roaming/npm:/mnt/j/Program Files/IntelliJ IDEA 2025.3.3/bin:/home/sergio/.vscode-server/extensions/openai.chatgpt-26.727.40816-linux-x64/bin/linux-x86_64
 
 Yarn version: 
   1.22.18
@@ -29,6 +29,11 @@ npm manifest:
       "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
     },
     "dependencies": {
+      "@fontsource-variable/space-grotesk": "^5.3.0",
+      "@hotwired/stimulus": "^3.2.2",
+      "@hotwired/turbo-rails": "^8.0.23",
+      "@tabler/core": "^1.4.0",
+      "@tabler/icons": "^3.46.0",
       "sass": "^1.102.0"
     }
   }
@@ -171,6 +176,29 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.28.1.tgz#10064ee44f4347b90c9a02b446bbf80a91632b12"
     integrity sha512-bm4Mowrv+GXMlpWX++EcXw/iLyd1o3+bJkC2DkWXYVvgZCqD/bSj9ctZeAMC3cIxgjRVR2Dufaiu4YPxr5gW1A==
   
+  "@fontsource-variable/space-grotesk@^5.3.0":
+    version "5.3.0"
+    resolved "https://registry.yarnpkg.com/@fontsource-variable/space-grotesk/-/space-grotesk-5.3.0.tgz#f35f8915850afbefe92b0fe15b1db49928e55186"
+    integrity sha512-2IxmvfB08i9vnGB3Ym/AXvhRE+8XOjWMXIyDum03c+tPwH0FUoMNQfGpU8NXPxjbws0Vvss3AH0Zqt4oJBBAdw==
+  
+  "@hotwired/stimulus@^3.2.2":
+    version "3.2.2"
+    resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
+    integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
+  
+  "@hotwired/turbo-rails@^8.0.23":
+    version "8.0.23"
+    resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-8.0.23.tgz#7a84ad041cb0f3e5d9ff97d1a1f0291550a93fc9"
+    integrity sha512-iBILwda3qmQC7FYM70+4s6kEQ7Fx9dJ6+yGxjPyrz9a5JDx1+y7OAA5TA7GGVOZJoicMLrKGdFDNorl40X35lw==
+    dependencies:
+      "@hotwired/turbo" "^8.0.23"
+      "@rails/actioncable" ">=7.0"
+  
+  "@hotwired/turbo@^8.0.23":
+    version "8.0.23"
+    resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-8.0.23.tgz#a6eebc9ab4a5faadae265a4cbec8cfcb5731e77c"
+    integrity sha512-GZ7cijxEZ6Ig71u7rD6LHaRv/wcE/hNsc+nEfiWOkLNqUgLOwo5MNGWOy5ZV9ZUDSiQx1no7YxjTNnT4O6//cQ==
+  
   "@parcel/watcher-android-arm64@2.6.0":
     version "2.6.0"
     resolved "https://registry.yarnpkg.com/@parcel/watcher-android-arm64/-/watcher-android-arm64-2.6.0.tgz#99aaa3223d43807c9340af439cad7e9b6d26ada6"
@@ -253,6 +281,34 @@ Lockfile:
       "@parcel/watcher-linux-x64-musl" "2.6.0"
       "@parcel/watcher-win32-arm64" "2.6.0"
       "@parcel/watcher-win32-x64" "2.6.0"
+  
+  "@popperjs/core@^2.11.8":
+    version "2.11.8"
+    resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
+    integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
+  
+  "@rails/actioncable@>=7.0":
+    version "7.2.302"
+    resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.2.302.tgz#f074632ee55aa1b5b16cd2be094b42981a71c322"
+    integrity sha512-9JOPzUb7RCqIEWeoE78mPFd71fzyJ25LjeMzD45zQ75f41ca7BsgQVqiyrIuxDZ1yyZ4PdyxCMZF0KJlJ9qX0g==
+  
+  "@tabler/core@^1.4.0":
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/@tabler/core/-/core-1.4.0.tgz#9e011289d92cf6120655793cef6576fd67eb07f3"
+    integrity sha512-5BigzOlbOH9N0Is4u0rYNRCiwtnUXWO57K9zwuscygcicAa8UV9MGaS4zTgQsZEtZ9tsNANhN/YD8gCBGKYCiw==
+    dependencies:
+      "@popperjs/core" "^2.11.8"
+      bootstrap "5.3.7"
+  
+  "@tabler/icons@^3.46.0":
+    version "3.46.0"
+    resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-3.46.0.tgz#28ba3f4895715863fdd78b49a5617764c9557fe5"
+    integrity sha512-f2RYFl3fzPwj5WO82x6en0dmkjefxEfOm16D1ByM6cj/McNiwOkL4VaPUoP9VVIrXAD9WnTSVFr70px703b//A==
+  
+  bootstrap@5.3.7:
+    version "5.3.7"
+    resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.7.tgz#8640065036124d961d885d80b5945745e1154d90"
+    integrity sha512-7KgiD8UHjfcPBHEpDNg+zGz8L3LqR3GVwqZiBRFX04a1BCArZOz1r2kjly2HQ0WokqTO0v1nF+QAt8dsW4lKlw==
   
   chokidar@^5.0.0:
     version "5.0.0"

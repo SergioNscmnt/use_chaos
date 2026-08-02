@@ -8,8 +8,22 @@ module Administracao
       @pedidos = @pedidos.where(situacao: params[:situacao]) if params[:situacao].present?
       @pedidos = @pedidos.where(responsavel_id: params[:responsavel_id]) if params[:responsavel_id].present?
       if params[:busca].present?
-        termo = "%#{ActiveRecord::Base.sanitize_sql_like(params[:busca])}%"
-        @pedidos = @pedidos.where("numero LIKE :termo OR contato_cliente LIKE :termo", termo:)
+        busca = params[:busca].strip
+        termo = "%#{ActiveRecord::Base.sanitize_sql_like(busca)}%"
+        digitos = busca.gsub(/\D/, "")
+        consulta = "numero LIKE :termo OR contato_cliente LIKE :termo"
+        argumentos = { termo: }
+
+        if digitos.length >= 8
+          contato_normalizado = <<~SQL.squish
+            REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(contato_cliente,
+            '+', ''), ' ', ''), '(', ''), ')', ''), '-', ''), '.', '')
+          SQL
+          consulta += " OR #{contato_normalizado} LIKE :digitos"
+          argumentos[:digitos] = "%#{ActiveRecord::Base.sanitize_sql_like(digitos)}%"
+        end
+
+        @pedidos = @pedidos.where(consulta, argumentos)
       end
       @pedidos = @pedidos.where(created_at: Time.zone.parse(params[:inicio]).beginning_of_day..) if params[:inicio].present?
       @pedidos = @pedidos.where(created_at: ..Time.zone.parse(params[:fim]).end_of_day) if params[:fim].present?

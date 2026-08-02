@@ -15,11 +15,12 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="layout-publico">
+    <% carrinho_resumo = carrinho_atual_existente %>
     <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
     <header class="navbar navbar-expand-md navbar-neon sticky-top" aria-label="Navegação principal">
       <div class="container-xl">
-        <a class="navbar-brand marca-neon" href="/">Óculos Neon</a>
+        <a class="navbar-brand marca-neon" href="/">USE CHAOS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-publico" aria-controls="menu-publico" aria-expanded="false" aria-label="Abrir menu">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,11 +28,18 @@
           <ul class="navbar-nav ms-auto align-items-md-center">
             <li class="nav-item"><a class="nav-link" href="/produtos">Catálogo</a></li>
             <li class="nav-item"><a class="nav-link" href="/manifestacoes/new">Sugestões</a></li>
-            <li class="nav-item ms-md-3"><a class="btn btn-neon" href="/carrinho">Carrinho</a></li>
+            <li class="nav-item">
+              <%= link_to "Administração",
+                    usuario_administrativo_signed_in? ? administracao_root_path : new_usuario_administrativo_session_path,
+                    class: "nav-link" %>
+            </li>
+            <li class="nav-item ms-md-3 d-flex align-items-center"><%= render "publico/carrinhos/atalho_offcanvas", carrinho: carrinho_resumo %></li>
           </ul>
         </nav>
       </div>
     </header>
+
+    <%= render "publico/carrinhos/offcanvas", carrinho: carrinho_resumo %>
 
     <%= render "shared/flash" %>
 
@@ -39,9 +47,9 @@
       <%= yield %>
     </main>
 
-    <footer class="rodape-publico py-4 mt-5">
+    <footer class="rodape-publico py-4">
       <div class="container-xl d-flex flex-column flex-md-row gap-2 justify-content-between">
-        <span>© <%= Time.zone.today.year %> Óculos Neon</span>
+        <span>© <%= Time.zone.today.year %> USE CHAOS</span>
         <span>Atendimento e conclusão da compra pelo WhatsApp</span>
       </div>
     </footer>

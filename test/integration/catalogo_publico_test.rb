@@ -14,11 +14,30 @@ class CatalogoPublicoTest < ActionDispatch::IntegrationTest
     assert_select "a.skip-link[href='#conteudo-principal']"
     assert_select "main#conteudo-principal[tabindex='-1']"
     assert_select "a[href='#{produto_path(@produto.slug)}']"
+    assert_select "nav#menu-publico a[href='#{new_usuario_administrativo_session_path}']", "Administração"
+    assert_select "nav#menu-publico a#atalho-carrinho[href='#{carrinho_path}'][data-bs-toggle='offcanvas']" do
+      assert_select "svg.icone-carrinho"
+      assert_select "span#contador-carrinho", "0"
+    end
+    assert_select "nav#menu-publico a.btn[href='#{carrinho_path}']", count: 0
+    assert_select "aside#carrinho-offcanvas[aria-labelledby='carrinho-offcanvas-titulo']"
+    assert_select "#carrinho-offcanvas-conteudo", text: /Seu carrinho está vazio/
 
     get produto_path(@produto.slug)
     assert_response :success
     assert_select "link[rel='canonical']"
     assert_select "h1", @produto.nome
+  end
+
+  test "menu leva usuário administrativo autenticado diretamente ao painel" do
+    usuario = criar_usuario(permissoes: %w[visualizar_metricas])
+    sign_in usuario
+
+    get root_path
+
+    assert_response :success
+    assert_select "nav#menu-publico a[href='#{administracao_root_path}']", "Administração"
+    assert_select "nav#menu-publico a[href='#{new_usuario_administrativo_session_path}']", count: 0
   end
 
   test "busca e categoria preservam apenas resultados compatíveis" do
@@ -27,6 +46,42 @@ class CatalogoPublicoTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h3", text: @produto.nome
     assert_select "h3", text: outro.nome, count: 0
+  end
+
+  test "card permite comprar produto disponível e desabilita ação indisponível" do
+    indisponivel = criar_produto(categoria: @categoria, estoque: 0)
+
+    get produtos_path
+
+    assert_response :success
+    assert_select "article#produto-card-#{@produto.id}" do
+      assert_select "a[href='#{produto_path(@produto.slug)}']", text: @produto.nome
+      assert_select "form[action='#{itens_carrinho_path}']" do
+        assert_select "input[name='produto_id'][value='#{@produto.id}']"
+        assert_select "input[name='quantidade'][value='1']"
+        assert_select "button[type='submit']", text: "Comprar" do
+          assert_select "svg.icone-botao[aria-hidden='true']", count: 1
+        end
+      end
+    end
+    assert_select "article#produto-card-#{indisponivel.id}" do
+      assert_select "form[action='#{itens_carrinho_path}']", count: 0
+      assert_select "button[disabled]", text: "Comprar" do
+        assert_select "svg.icone-botao[aria-hidden='true']", count: 1
+      end
+    end
+  end
+
+  test "filtros monetários aceitam moeda brasileira e preservam o valor localizado" do
+    produto_caro = criar_produto(categoria: @categoria, preco: 25_000)
+
+    get produtos_path, params: { preco_min: "R$ 200,00", preco_max: "R$ 300,00" }
+
+    assert_response :success
+    assert_select "h3", text: produto_caro.nome
+    assert_select "h3", text: @produto.nome, count: 0
+    assert_select "input[name='preco_min'][value='200,00']"
+    assert_select "input[name='preco_max'][value='300,00']"
   end
 
   test "produto inativo não é exposto" do

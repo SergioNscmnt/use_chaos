@@ -17,7 +17,7 @@
       <%= form.collection_select :responsavel_id, UsuarioAdministrativo.ativos.order(:nome), :id, :nome, { include_blank: "Atribuir a mim" }, class: "form-select mb-3" %>
       <%= form.label :observacao_interna, "Observação interna", class: "form-label" %>
       <%= form.text_area :observacao_interna, rows: 4, class: "form-control mb-3" %>
-      <%= form.submit "Atualizar", class: "btn btn-neon" %>
+      <%= form.button conteudo_botao("Atualizar", :atualizar), type: :submit, class: "btn btn-neon" %>
     <% end %>
   </div></div></div>
 </div>

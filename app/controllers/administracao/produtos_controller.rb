@@ -79,9 +79,12 @@ module Administracao
 
     def produto_params
       params.expect(produto: [
-        :categoria_id, :nome, :slug, :sku, :descricao, :preco_centavos, :custo_centavos,
+        :categoria_id, :nome, :slug, :sku, :descricao, :preco, :custo, :preco_centavos, :custo_centavos,
         :limiar_estoque_baixo, :ativo, :publicado, :disponivel, :destaque, :lancamento_em,
-        { caracteristicas: [], imagens_produto_attributes: %i[id arquivo texto_alternativo posicao principal _destroy] }
+        {
+          caracteristicas: [],
+          imagens_produto_attributes: [ %i[id arquivo texto_alternativo posicao principal _destroy] ]
+        }
       ])
     end
 
