@@ -49,7 +49,7 @@ gem "thruster", require: false
 
 # Analisa uploads com ImageMagick; variantes derivadas ficam desabilitadas até
 # que o ambiente ofereça libvips >= 8.13 com bloqueio de loaders não confiáveis.
-gem "mini_magick", "~> 5.3"
+gem "mini_magick", "~> 5.4"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
