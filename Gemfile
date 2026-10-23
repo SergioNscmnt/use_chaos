@@ -25,7 +25,7 @@ gem "pundit", "~> 2.5"
 gem "rack-attack", "~> 6.8"
 
 # Paginação e relatórios gerenciais
-gem "pagy", "~> 43.0"
+gem "pagy", "~> 43.8"
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2"
 gem "csv", "~> 3.3"
